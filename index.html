@@ -255,7 +255,38 @@ body.touring #tour{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 
 /* ============ story layer: the landing page that scrolls round the globe ============ */
 :root{--f-disp:"Instrument Serif","Times New Roman",Georgia,serif;--s-ink:#1d1823;--s-paper:#fbf6ee;--gold:#d99a2b}
-body.story .fadeable,body.story #tour,body.story #toast,body.story #bubble,body.story #talk,body.story #azan,body.story #prompt{opacity:0!important;pointer-events:none!important}
+
+/* Where's Ipan card and the arcade */
+#found{z-index:7;left:14px;top:calc(env(safe-area-inset-top,0px) + 98px);transform:translate(0,-14px);width:min(360px,calc(100vw - 28px));padding:13px 16px 15px;opacity:0;pointer-events:none;transition:opacity .35s,transform .45s cubic-bezier(.2,1.4,.4,1)}
+#found.on{opacity:1;transform:none;pointer-events:auto}
+#found .fHead{display:flex;align-items:center;gap:8px}
+#found .fBadge{background:#e0a43a;color:#fff;font:700 .78rem/1 var(--f-head);padding:5px 9px;border-radius:99px}
+#found small{font:800 .7rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:1}
+#fClose{border:0;background:none;font-size:1.35rem;line-height:1;color:var(--muted);padding:0 4px}
+#found h3{margin:9px 0 4px;font:600 1.2rem/1.2 var(--f-head)}
+#found p{margin:0;font-size:.92rem;line-height:1.45}
+#found .fHint{margin-top:9px;color:var(--muted);font-size:.84rem}
+#found .fRow{display:flex;gap:8px;margin-top:12px} #found .fRow:empty{display:none}
+#found .fRow button{flex:1;border:0;border-radius:12px;padding:11px;font:600 .92rem/1 var(--f-head);background:var(--ink);color:#fff}
+#found .fRow button.alt{background:var(--soft);color:var(--ink)}
+#arcade{inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:rgba(18,12,28,.74);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#arcade.on{display:flex}
+#arcBox{position:relative;background:linear-gradient(#2a1f3d,#160f22);border-radius:22px;padding:10px 12px 12px;box-shadow:0 0 0 3px #ff4fa3,0 0 44px rgba(255,79,163,.5),0 0 100px rgba(80,220,255,.22)}
+#arcTop{display:flex;align-items:center;gap:8px;color:#fff;font:600 1rem/1 var(--f-head);padding:2px 2px 10px}
+#arcTop b{flex:1;color:#ffd27a;letter-spacing:.04em}
+#arcTop span{font-variant-numeric:tabular-nums;background:rgba(255,255,255,.08);padding:7px 10px;border-radius:10px;min-width:44px;text-align:center}
+#arcX{border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:10px;width:34px;height:34px;font-size:1.25rem;line-height:1}
+#arcC{display:block;width:min(420px,88vw,calc((100svh - 110px)*.75));aspect-ratio:3/4;border-radius:12px;background:#0d0a16;touch-action:none;cursor:none}
+#arcMsg{position:absolute;left:12px;right:12px;top:56px;bottom:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:22px;gap:10px;border-radius:12px;background:rgba(13,10,22,.84)}
+#arcMsg[hidden]{display:none}
+#arcMsg h3{margin:0;font:700 2rem/1.1 var(--f-head);color:#ffd27a}
+#arcMsg small{font:800 .72rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:#ff8cc6}
+#arcMsg p{margin:0;max-width:310px;line-height:1.45;color:#e8e0f2;font-size:.95rem}
+#arcMsg .k{font-size:.84rem;color:#b9aecb}
+#arcMsg .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+#arcMsg button{border:0;border-radius:12px;padding:12px 18px;font:600 1rem/1 var(--f-head);background:#ff4fa3;color:#fff;margin-top:6px}
+#arcMsg button.alt{background:rgba(255,255,255,.12)}
+body.story .fadeable,body.story #found,body.story #tour,body.story #toast,body.story #bubble,body.story #talk,body.story #azan,body.story #prompt{opacity:0!important;pointer-events:none!important}
 body:not(.story) .sOnly,body:not(.story) #story{display:none!important}
 #story{position:fixed;inset:0;z-index:8;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;outline:none;color:var(--s-ink);-webkit-user-select:text;user-select:text}
 #story::-webkit-scrollbar{display:none}
@@ -477,7 +508,7 @@ body.touch #backStory{bottom:auto;top:calc(var(--topH,120px) + 8px);right:12px}
   <section class="ch last" data-k="Walk"><div class="pin">
     <div class="kick rv" style="justify-content:center"><b>06</b> Your turn</div>
     <h2 class="split">Come walk the <em>street.</em></h2>
-    <p class="rv" style="--d:1">Every shop runs a toy demo. Walk in, try one, and watch your trail reach DaulatLabs. There is a car, a jump course and a cat.</p>
+    <p class="rv" style="--d:1">Every shop runs a toy demo. Walk in, try one, and watch your trail reach DaulatLabs. There is a car, an arcade, a cat, and eight cardboard versions of me hiding somewhere.</p>
     <div id="playWrap" class="rv" style="--d:2">
       <svg id="playRing" viewBox="0 0 176 176" aria-hidden="true"><defs><path id="ringP" d="M88,88 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#ringP">Walk the street · try the demos · say hello · </textPath></text></svg>
       <button class="cta mag" id="sPlay">Walk the<br><em>street</em></button>
@@ -512,6 +543,8 @@ body.touch #backStory{bottom:auto;top:calc(var(--topH,120px) + 8px);right:12px}
 <div class="ui card fadeable" id="hint"></div>
 <div class="ui card" id="tour" role="status"><small id="tourStep"></small><p id="tourTxt"></p><div class="row"><div id="tourDots"></div><button id="tourSkip">Skip</button><button id="tourNext">Next</button></div></div>
 <div class="ui card" id="toast" role="status"></div>
+<div class="ui card" id="found" role="status"><div class="fHead"><span class="fBadge" id="fNum"></span><small>Where's Ipan</small><button id="fClose" aria-label="Close">×</button></div><h3 id="fTitle"></h3><p id="fTxt"></p><p class="fHint" id="fHint"></p><div class="fRow" id="fRow"></div></div>
+<div class="ui" id="arcade" role="dialog" aria-label="Ticket Rush, an arcade game"><div id="arcBox"><div id="arcTop"><b>Ticket Rush</b><span id="arcScore">0</span><span id="arcTime">30s</span><button id="arcX" aria-label="Close the arcade">×</button></div><canvas id="arcC"></canvas><div id="arcMsg"></div></div></div>
 <div class="ui card" id="bubble">meow</div>
 <div class="ui fadeable" id="joy" aria-label="Move stick"><div id="knob"></div></div>
 <button class="ui fadeable" id="jumpBtn" aria-label="Jump">Jump</button>
@@ -554,6 +587,7 @@ function preFinish(after){ PRE.done=true; PRE.target=100; const wait=Math.max(0,
   setTimeout(()=>{ $('preN').innerHTML='1<em>00</em>'; $('preL').style.transform='scaleX(1)'; $('preT').textContent='Ready';
     setTimeout(()=>{ $('pre').classList.add('done'); if(after) after(); setTimeout(()=>$('pre').remove(),1300); },reduce?50:380); },wait); }
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
+const IP_FOUND = new Set((()=>{ try{ return JSON.parse(store.get('ipan-found')||'[]'); }catch(e){ return []; } })());
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 /* ============ content ============ */
@@ -801,7 +835,7 @@ const placesNav = $('places');
 PLACES.forEach(p=>{ const b=document.createElement('button'); b.dataset.p=p.id; b.style.setProperty('--c',p.col); b.innerHTML=`<i></i>${p.name}`; b.onclick=()=>goTo(p.id); placesNav.appendChild(b); });
 let openId = null;
 function setAccent(c){ document.documentElement.style.setProperty('--accent',c); }
-function updateQuest(){ $('quest').textContent = `${tried.size} of ${DEMOS.length} demos tried`; [...placesNav.children].forEach(b=>b.classList.toggle('seen',seen.has(b.dataset.p)||tried.has(b.dataset.p))); }
+function updateQuest(){ $('quest').textContent = `${tried.size}/${DEMOS.length} demos · ${IP_FOUND.size}/8 Ipans found`; [...placesNav.children].forEach(b=>b.classList.toggle('seen',seen.has(b.dataset.p)||tried.has(b.dataset.p))); }
 function renderSheet(keep){ const b=$('sheetBody'), st=b.scrollTop; b.innerHTML=CONTENT[openId](); b.scrollTop=keep?st:0; wireSheet(); }
 function refresh(id){ if(openId===id) renderSheet(true); }
 function openSheet(id){
@@ -1068,7 +1102,7 @@ const M4=new T.Matrix4(), Q0=new T.Quaternion(), E0=new T.Euler(), V0=new T.Vect
 const mtx=(x,y,z,sx=1,sy=1,sz=1,ry=0)=>M4.clone().compose(V0.set(x,y,z),Q0.setFromEuler(E0.set(0,ry,0)),V1.set(sx,sy,sz));
 
 /* ---- ground, road ---- */
-add(new T.PlaneGeometry(LOOP,62), mat('#93bf6c',{r:1}), LMID,-.01,4, S, false).rotation.x=-Math.PI/2;
+add(new T.PlaneGeometry(LOOP,66.2), mat('#93bf6c',{r:1}), LMID,-.01,ZC, S, false) /* pole to pole */.rotation.x=-Math.PI/2;
 const ROAD_C=C('#55545c'), ROAD_WET=C('#3b3d46'), WALK_C=C('#d8cfc3'), WALK_WET=C('#b9b1a6');
 const roadMat=new T.MeshStandardMaterial({color:ROAD_C.clone(),roughness:.95}), walkMat=new T.MeshStandardMaterial({color:WALK_C.clone(),roughness:.95});
 const RX=LMID, RL=LOOP;
@@ -1295,7 +1329,7 @@ function tree(x,z,s=1,big=false){
   g.userData.sway=rnd()*6; g.userData.s=s; g.userData.v=1; trees.push(g); circles.push({x,z,r:.4*s}); return g;
 }
 [-49,-35,-17,21,35,49].forEach(x=>{ B(1.4,.3,1.4,mat('#bdb5aa'),x,.15,4.75); tree(x,4.75,.75); });
-[[-12,23,1.2,1],[7,27,1.1,1],[-15,13,.9,0],[-7,29,1,1],[-20,24,1,0],[-47,16,1.1,1],[-49,27,1,0],[33,14,1.1,1],[41,22,1,0],[53,14,1.1,1],[30,27,.9,0],[-18,31,1,1],[46,30,1.2,1]].forEach(([x,z,s,b])=>tree(x,z,s,!!b));
+[[-12,23,1.2,1],[7,27,1.1,1],[-15,13,.9,0],[-7,25.4,1,1],[-20,24,1,0],[-47,16,1.1,1],[-51,26.5,1,0],[33,14,1.1,1],[41,22,1,0],[53,14,1.1,1],[30,27,.9,0],[-17.5,26.2,1,1],[50,25.8,1.2,1]].forEach(([x,z,s,b])=>tree(x,z,s,!!b));
 [-36.2,-24,-9,8.5,38.9].forEach(x=>{ for(let i=0;i<5;i++) add(gSph(.38,9,7),mat(['#e05a9a','#f07ab6','#4f9b5b'][i%3]),x+(rnd()-.5)*1.2,.4+rnd()*.9,-7.3+(rnd()-.5)*.6); });
 for(let x=-52;x<=46;x+=14){ [[4.4,1],[-4.6,-1]].forEach(([z,s],k)=>{ if(k===1&&Math.abs(x)<8) return; const g=new T.Group(); g.position.set(x+(k?7:0),0,z); S.add(g);
   add(gCyl(.09,.13,4.6,8),mat('#2f4a43',{m:.4,r:.5}),0,2.3,0,g); B(.08,.08,1,mat('#2f4a43',{m:.4,r:.5}),0,4.55,-s*.45,g);
@@ -1435,7 +1469,7 @@ function strike(){ const a=boltGeo.attributes.position.array, side=Math.random()
   for(let i=0;i<26;i++){ const nx=x+(Math.random()-.5)*5, ny=y-2.8, nz=z+(Math.random()-.5)*2.5; a[o++]=x;a[o++]=y;a[o++]=z;a[o++]=nx;a[o++]=ny;a[o++]=nz; x=nx;y=ny;z=nz; }
   boltGeo.attributes.position.needsUpdate=true; bolt.visible=true; bolt.material.opacity=1; }
 const puddleMat=new T.MeshStandardMaterial({color:C('#6f7f96'),roughness:.04,metalness:.6,transparent:true,opacity:0,depthWrite:false});
-[[-30,2,1.6],[-8,-2.2,1.2],[6,2.6,1.8],[22,-1.6,1.4],[40,2.2,1.5],[-46,-1,1.3],[-13,5.6,1],[30,-5.8,.9],[52,5.4,1.1],[-52,5.8,1]].forEach(([x,z,r])=>{ const m=add(new T.CircleGeometry(r,18),puddleMat,x,Math.abs(z)>4?.17:.075,z,S,false); m.rotation.x=-Math.PI/2; m.scale.y=.6+rnd()*.3; });
+[[-30,2,1.6],[-8,-2.2,1.2],[6,2.6,1.8],[22,-1.6,1.4],[40,2.2,1.5],[-46,-1,1.3],[-7.4,5.7,1],[30,-5.8,.9],[52,5.4,1.1],[-52,5.8,1]].forEach(([x,z,r])=>{ const m=add(new T.CircleGeometry(r,18),puddleMat,x,Math.abs(z)>4?.17:.075,z,S,false); m.rotation.x=-Math.PI/2; m.scale.y=.6+rnd()*.3; });
 function umbrella(col){ const g=new T.Group(); const c=add(new T.SphereGeometry(1.1,8,4,0,Math.PI*2,0,Math.PI/2.3),mat(col,{r:.6,side:T.DoubleSide}),0,0,0,g); c.scale.y=.55;
   add(gCyl(.035,.035,1.9,6),mat('#2b2433'),0,-.9,0,g); add(gSph(.06,6,4),mat('#2b2433'),0,.62,0,g); g.position.set(.38,3.15,.05); g.scale.setScalar(.001); g.visible=false; return g; }
 
@@ -1660,6 +1694,220 @@ Object.assign(W,{
 });
 
 /* ============ merge the static street, then make invisible click targets for each place ============ */
+/* ============ round two: a skyline, an arcade, cardboard Ipans to find, favours to do ============ */
+/* ---- the park side: a ring road round the north pole, a lane up from the car park, kampung houses ---- */
+{ const RZ=30; B(RL,.06,2.8,roadMat,RX,.035,RZ,S,false);
+  [-1,1].forEach(sd=>B(RL,.14,.22,mat('#bdb5aa'),RX,.07,RZ+sd*1.5));
+  for(let x=LX0+1.5;x<LX0+LOOP;x+=4) B(1.6,.02,.14,mat('#f2eee2',{r:.8}),x,.075,RZ,S,false);
+  B(3,.06,15,roadMat,-24,.035,21.05,S,false); for(let z=15;z<28;z+=3.2) B(.14,.02,1.5,mat('#f2eee2',{r:.8}),-24,.075,z,S,false);
+  /* a rumah kampung: stilts, timber walls, a steep roof; widened so the globe does not squeeze it */
+  const kampung=(x,z,wall,roof,face)=>{ const g=new T.Group(); g.position.set(x,0,z); g.rotation.y=face; g.scale.x=1/Math.cos((z-ZC)/ZS); S.add(g);
+    const wood=mat(wall,{r:.9}), dark=mat('#5b3b26',{r:.9}), trimM=mat('#f4ead8');
+    [-2.2,0,2.2].forEach(px=>[-1.6,1.6].forEach(pz=>B(.22,1.3,.22,dark,px,.65,pz,g)));
+    B(5,.2,3.8,dark,0,1.35,0,g); B(4.6,2.2,3.4,wood,0,2.55,0,g);
+    [-1.3,1.3].forEach(wx=>{ B(1,1,.06,winMat,wx,2.7,1.72,g); B(1.2,.12,.12,trimM,wx,2.14,1.76,g); });
+    B(.9,1.8,.06,dark,0,2.35,1.72,g);
+    [0,1,2,3].forEach(i=>B(1.1,.12,.4,dark,0,.25+i*.32,2.15+(3-i)*.32,g));
+    const sh=new T.Shape(); sh.moveTo(-2.3,0); sh.lineTo(2.3,0); sh.lineTo(0,2.2); sh.lineTo(-2.3,0);
+    const rg=new T.ExtrudeGeometry(sh,{depth:5.2,bevelEnabled:false}); rg.translate(0,0,-2.6); const rf=add(rg,mat(roof,{r:.8}),0,3.62,0,g); rf.rotation.y=Math.PI/2;
+    B(.12,.5,.12,trimM,2.66,5.9,0,g); B(.12,.5,.12,trimM,-2.66,5.9,0,g);
+    const k=g.scale.x; rects.push({x1:x-2.6*k,x2:x+2.6*k,z1:z-2,z2:z+2.2,c:wall}); return g; };
+  kampung(47,20.5,'#b07a45','#c4553a',0); kampung(-46.5,21.5,'#c9a06a','#7a4a35',0); kampung(39,12.2,'#a86a4a','#3f7a6a',0); }
+
+/* ---- the arcade cabinet on the park side of the street ---- */
+const ARC_POS={x:-13.4,z:6.4};
+{ const g=new T.Group(); g.position.set(ARC_POS.x,0,ARC_POS.z); S.add(g);
+  const body=mat('#3b2a5c',{r:.5}), dark=mat('#21182f',{r:.6}), pink=mat('#ff4fa3',{e:'#ff4fa3',ei:1.2,r:.4}), cyan=mat('#4fe3ff',{e:'#4fe3ff',ei:1.2,r:.4});
+  rbox(1.3,2.5,.95,.06,body,0,1.25,-.05,g);
+  B(1.22,.5,.55,dark,0,1.12,.55,g).rotation.x=-.35;
+  [-1,1].forEach(s=>{ B(.05,2.46,.05,s<0?pink:cyan,s*.66,1.25,.43,g,false); });
+  B(1.34,.06,1,pink,0,2.52,-.05,g,false);
+  const scr=canvasTex(256,200,(c,W,H)=>{ c.fillStyle='#0d0a16'; c.fillRect(0,0,W,H);
+    c.strokeStyle='rgba(79,227,255,.25)'; c.lineWidth=2; for(let y=10;y<H;y+=22){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); }
+    [['#9fd3f7',40,40],['#ffe08a',150,70],['#f7a8c4',90,110],['#9ee0c8',190,30]].forEach(([col,x,y])=>{ c.fillStyle=col; rr(c,x,y,44,28,6); c.fill(); });
+    c.fillStyle='#4fe3ff'; rr(c,88,168,80,14,7); c.fill();
+    c.fillStyle='#ffd27a'; c.font=`700 30px ${FH}`; c.textAlign='center'; c.fillText('PLAY',W/2,156); });
+  const sm=new T.Mesh(new T.PlaneGeometry(.98,.76),new T.MeshBasicMaterial({map:scr})); sm.position.set(0,1.78,.44); sm.rotation.x=-.12; g.add(sm);
+  const mq=canvasTex(512,128,(c,W,H)=>{ const gr=c.createLinearGradient(0,0,W,0); gr.addColorStop(0,'#ff4fa3'); gr.addColorStop(1,'#7a5cff'); c.fillStyle=gr; rr(c,4,4,W-8,H-8,24); c.fill();
+    c.fillStyle='#fff'; c.font=`700 64px ${FH}`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('TICKET RUSH',W/2,H/2+4); });
+  const mm=new T.Mesh(new T.PlaneGeometry(1.24,.31),new T.MeshBasicMaterial({map:mq})); mm.position.set(0,2.32,.44); g.add(mm);
+  [-.22,.22].forEach((x,k)=>add(gSph(.07,8,6),k?cyan:pink,x,1.4,.78,g,false));
+  const gw=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:C('#ff6fb8'),blending:T.AdditiveBlending,depthWrite:false,transparent:true,opacity:.55})); gw.scale.set(3.2,3.2,1); gw.position.set(0,1.9,.7); g.add(gw);
+  circles.push({x:ARC_POS.x,z:ARC_POS.z,r:.85}); }
+
+/* ---- Where's Ipan: cardboard cut-outs of me hidden round the planet ---- */
+const cutTex=(()=>{ const W=256,H=448, fig=document.createElement('canvas'); fig.width=W; fig.height=H; const g=fig.getContext('2d');
+  const ln=(x1,y1,x2,y2,w,c)=>{ g.strokeStyle=c; g.lineWidth=w; g.lineCap='round'; g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); };
+  const ci=(x,y,r,c)=>{ g.fillStyle=c; g.beginPath(); g.arc(x,y,r,0,7); g.fill(); };
+  const el=(x,y,a,b,r,c)=>{ g.fillStyle=c; g.beginPath(); g.ellipse(x,y,a,b,r,0,7); g.fill(); };
+  ln(112,300,108,392,28,'#353a48'); ln(144,300,148,392,28,'#353a48'); el(100,402,24,13,0,'#f4f1ea'); el(156,402,24,13,0,'#f4f1ea');
+  ln(92,224,64,298,26,'#e6a23c'); ci(62,308,14,'#e2a978'); ln(164,224,204,162,26,'#e6a23c'); ci(210,150,14,'#e2a978');
+  g.fillStyle='#e6a23c'; rr(g,80,196,96,120,32); g.fill();
+  ln(108,202,128,252,5,'#2f8579'); ln(148,202,128,252,5,'#2f8579'); g.fillStyle='#fff'; rr(g,113,250,30,36,5); g.fill(); g.fillStyle='#2f8579'; g.fillRect(113,250,30,9);
+  ci(128,128,66,'#e2a978');
+  g.fillStyle='#251b16'; g.beginPath(); g.arc(128,126,69,Math.PI*1.03,Math.PI*1.97); g.closePath(); g.fill(); el(152,98,48,22,-.35,'#251b16');
+  el(106,142,7,10,0,'#251b16'); el(150,142,7,10,0,'#251b16'); ci(90,162,11,'rgba(240,120,120,.4)'); ci(166,162,11,'rgba(240,120,120,.4)');
+  g.strokeStyle='#251b16'; g.lineWidth=5; g.lineCap='round'; g.beginPath(); g.arc(128,158,15,.25,Math.PI-.25); g.stroke();
+  const sil=document.createElement('canvas'); sil.width=W; sil.height=H; const s=sil.getContext('2d'); s.drawImage(fig,0,0); s.globalCompositeOperation='source-in'; s.fillStyle='#c9a46a'; s.fillRect(0,0,W,H);
+  return canvasTex(W,H,c=>{ for(let a=0;a<20;a++) c.drawImage(sil,Math.cos(a/20*6.283)*10,Math.sin(a/20*6.283)*10); c.drawImage(fig,0,0); }); })();
+const cutMat=new T.MeshStandardMaterial({map:cutTex,alphaTest:.5,side:T.DoubleSide,roughness:.85});
+const cutGeo=new T.PlaneGeometry(.95,1.66); cutGeo.translate(0,.83,0);
+const IPANS=[
+  {id:'car',    where:'riding in the yellow car',                 par:()=>myCar,     at:[-.45,1.2,-.2], sc:.62},
+  {id:'board',  where:'reading the Now board from behind',        at:[6.9,0,9.1]},
+  {id:'bay',    where:'waiting for a spot in the car park',       at:[-20.3,0,12.6]},
+  {id:'course', where:'up on the jump course',                    at:[21,4.1,22.5], sc:.8},
+  {id:'lamp',   where:'on top of a street lamp near Rumika',      at:[32,4.58,3.5], sc:.62},
+  {id:'tree',   where:'behind a big tree at the back of the park', at:[-6.3,0,24.6]},
+  {id:'traffic',where:'hitching a ride on one of the cars',       par:()=>cars[1].g, at:[0,1.8,0], sc:.7, turn:true},
+  {id:'roof',   where:'on the DaulatLabs roof',                   at:[4.6,11.58,-7.3]},
+];
+const FACTS=[
+  ['DaulatLabs','The company I am building. Five small systems for Malaysian operators: Santaka for restaurants, Rumika for residences, Arogya for clinics, Mahardika for insurance agencies and Pautika for public profiles.'],
+  ['Product Owner at MAGNET','I own the requirements and the backlog for MagEtegra, an on-premise access control system, and MagNicas, a cloud property management platform.'],
+  ['Support first, then product','I started in IT support and moved into product, so my specs come from knowing what breaks on site.'],
+  ['I build my own tools','A Windows toolkit that automates support diagnostics: RabbitMQ repair, SQL index fixes, environment setup.'],
+  ['30% faster reporting','As a Process & Systems Analyst intern at SLB, I made the reporting 30% faster. Before that, IT support at CTC Global.'],
+  ['Computer Science, UTM','BCS in Computer Networks & Security (Hons), 2025, after a Diploma in Computer Science in 2022. Both at UTM.'],
+  ['First place','National Consumer Intellectual Challenge 2024. I am also CompTIA Data+ certified.'],
+  ['Always learning','Claude and Codex every day, for specs as much as for code. Studying for ECBA next, then PL-300 and PSPO I.'],
+];
+const twinkleMat=new T.SpriteMaterial({map:glowTex,color:C('#ffe08a'),blending:T.AdditiveBlending,depthWrite:false,transparent:true,opacity:0});
+IPANS.forEach((s,i)=>{ const g=new T.Group(); const p=s.par?s.par():scene; p.add(g); g.position.set(...s.at); g.scale.setScalar(s.sc||1);
+  const m=new T.Mesh(cutGeo,cutMat); m.castShadow=true; g.add(m); B(.5,.06,.3,mat('#b38d55'),0,.03,-.06,g,false);
+  const tw=new T.Sprite(twinkleMat.clone()); tw.scale.setScalar(.9); tw.position.set(.3,1.55,.1); g.add(tw);
+  if(s.turn) g.rotation.y=-p.rotation.y;
+  Object.assign(s,{g,tw,k:i*1.7,pop:0}); g.visible=!IP_FOUND.has(s.id); });
+const wp=new T.Vector3();
+function ipanAt(s){ s.g.getWorldPosition(wp); return wp; }
+function findIpan(s){ if(IP_FOUND.has(s.id)||s.pop) return; IP_FOUND.add(s.id); store.set('ipan-found',JSON.stringify([...IP_FOUND])); s.pop=.001; updateQuest();
+  const p=ipanAt(s); burst(p.x,p.y+1.2,p.z); sfx.win(); showFound(); }
+function nextIpan(){ return IPANS.find(s=>!IP_FOUND.has(s.id)); }
+let foundT=0;
+function showFound(){ const n=IP_FOUND.size, all=n>=IPANS.length, f=FACTS[Math.min(n,FACTS.length)-1], nx=nextIpan();
+  $('fNum').textContent=`${n} of ${IPANS.length}`;
+  $('fTitle').textContent=all?'That is all eight of me':f[0]; $('fTxt').textContent=all?'Thanks for looking this hard. If any of it sounds useful, I would like to hear from you.':f[1];
+  $('fHint').textContent=nx?`Next: one of me is ${nx.where}.`:''; $('fHint').hidden=!nx;
+  $('fRow').innerHTML=all?'<button id="fHello">Say hello</button><button id="fIn" class="alt">LinkedIn</button>':'';
+  if(all){ $('fHello').onclick=()=>{ hideFound(); travel('mail'); }; $('fIn').onclick=()=>open('https://www.linkedin.com/in/amirulirfn','_blank','noopener'); const p=P; burst(p.x,2,p.z); setTimeout(()=>burst(p.x+1,3,p.z-1),300); }
+  $('found').classList.add('on'); clearTimeout(foundT); if(!all) foundT=setTimeout(hideFound,11000); }
+function hideFound(){ $('found').classList.remove('on'); }
+$('fClose').onclick=hideFound;
+function tapIpan(cx,cy){ let hitS=null, hd=1e9;
+  IPANS.forEach(s=>{ if(IP_FOUND.has(s.id)||!s.g.visible) return; const p=ipanAt(s), sc=s.g.scale.x; onScreen(tmp.set(p.x,p.y+.85*sc,p.z)); if(tmp.z>1) return;
+    const d=Math.hypot((tmp.x+1)/2*innerWidth-cx,(1-tmp.y)/2*innerHeight-cy); if(d<Math.max(34,innerHeight*.045)&&d<hd){ hd=d; hitS=s; } });
+  if(hitS){ findIpan(hitS); return true; } return false; }
+let introShown=false;
+function ipanIntro(){ if(introShown||story||touring||IP_FOUND.size>=IPANS.length) return; introShown=true;
+  toast(IP_FOUND.size?`${IPANS.length-IP_FOUND.size} cardboard Ipans are still hiding round this planet.`:`Eight cardboard Ipans are hidden round this planet. ${touchy?'Tap':'Click'} one when you spot it.`); }
+
+/* ---- favours for the neighbours ---- */
+const FAV=(()=>{ const d={tea:0,ball:0,mail:0}; try{ return Object.assign(d,JSON.parse(store.get('ipan-fav')||'{}')); }catch(e){ return d; } })();
+const setFav=(k,v)=>{ FAV[k]=v; store.set('ipan-fav',JSON.stringify(FAV)); };
+const tipLine=()=>{ const nx=nextIpan(); return nx?`Oh, and I saw a cardboard you ${nx.where}.`:'Everyone on this street knows you now.'; };
+const BALL={x:-28.6,z:14.4};
+const ball=add(gSph(.26,14,10),mat('#e2493b',{r:.5}),BALL.x,.26,BALL.z,scene); ball.visible=FAV.ball<2;
+const held={tea:new T.Group(),ball:new T.Group(),mail:new T.Group()};
+add(gCyl(.1,.08,.24,12),mat('#c98a4b',{r:.4}),0,0,0,held.tea); add(gCyl(.105,.105,.03,12),mat('#fff6e0'),0,.12,0,held.tea);
+add(gSph(.2,12,8),mat('#e2493b',{r:.5}),0,0,0,held.ball); B(.32,.2,.03,mat('#fffdf9'),0,0,0,held.mail); B(.08,.06,.035,mat('#d1453b'),.09,.05,0,held.mail);
+Object.values(held).forEach(h=>{ h.position.set(0,-.78,.12); h.visible=false; H.arms[1].add(h); });
+{ const old=pakMat.lines; pakMat.lines=c=>{
+    if(FAV.tea===0){ setFav('tea',1); return [...old(c),'Long shift at the gate today.','Could you bring me a teh tarik from Santaka? Kurang manis. It is the orange shop the other side of DaulatLabs.']; }
+    if(FAV.tea===1) return ['Santaka is the orange shop the other side of DaulatLabs. Kurang manis, ya.'];
+    if(FAV.tea===2){ setFav('tea',3); sfx.win(); return ['Teh tarik! Terima kasih, boss.',tipLine()]; }
+    return old(c); }; }
+{ const old=kid.lines; kid.lines=c=>{
+    if(FAV.ball===0){ setFav('ball',1); return [...old(c),'Also, my ball rolled over to the car park. Can you get it back for me?']; }
+    if(FAV.ball===1) return ['My ball is red. It went over by the car park.'];
+    if(FAV.ball===2){ setFav('ball',3); sfx.win(); return ['My ball! Thanks!',`Want to know a secret? ${tipLine()}`]; }
+    return old(c); }; }
+{ const n=npcs[1], old=n.lines; n.lines=c=>{ if(n.mode!=='stroll') return old(c);
+    if(FAV.mail===0){ setFav('mail',2); return [`${c.greet}!`,'Could you drop this letter in the postbox by the park? I am late for work.','Thank you! You are a good neighbour.']; }
+    if(FAV.mail===2) return ['The postbox is the red one by the park, near the Now board.'];
+    return old(c); }; }
+function extraAct(){ if(P.y>1) return null;
+  const near=(x,z,r)=>Math.hypot(wrapNear(x,P.x)-P.x,z-P.z)<r;
+  if(FAV.tea===1&&near(-17,-4.8,2.6)) return {type:'fn',label:'Pick up a teh tarik',col:'#e0744a',fn:()=>{ setFav('tea',2); sfx.ding(); toast('One teh tarik, kurang manis. Bring it to Pak Mat at the Rumika gate.'); }};
+  if(FAV.ball===1&&near(BALL.x,BALL.z,1.9)) return {type:'fn',label:'Pick up the ball',col:'#e2493b',fn:()=>{ setFav('ball',2); ball.visible=false; sfx.jump(); toast('Got the ball. Daniel is by the jump course.'); }};
+  if(FAV.mail===2&&near(10,6.3,2.2)) return {type:'fn',label:'Post Mei Ling\'s letter',col:'#d1453b',fn:()=>{ setFav('mail',3); sfx.print(); toast(`Posted. ${tipLine()}`); }};
+  if(near(ARC_POS.x,ARC_POS.z+.6,2)) return {type:'fn',label:'Play Ticket Rush',col:'#ff4fa3',fn:openArcade};
+  return null; }
+
+/* ---- neighbours chat on their own now and then ---- */
+let chatT=8;
+const CHAT=[c=>'Have you tried the arcade?',c=>'I keep seeing cardboard Ipans everywhere.',c=>'Santaka does the best teh tarik.',c=>'Mind the cars!',c=>c.k==='rain'||c.k==='storm'?'Hujan lagi.':c.h>=19||c.h<6?'Quiet tonight.':'Panas hari ni.',c=>'The DaulatLabs screen keeps lighting up.'];
+function playTick(dt,t){
+  const hk=FAV.tea===2?'tea':FAV.ball===2?'ball':FAV.mail===2?'mail':null; for(const k in held) held[k].visible=k===hk&&!driving;
+  if(FAV.ball<2) ball.position.y=.26+Math.abs(Math.sin(t*2))*.05;
+  for(const s of IPANS){
+    if(s.pop){ s.pop+=dt; const k=s.pop/.7; s.g.scale.setScalar((s.sc||1)*(k<.3?1+k:Math.max(.001,1.3*(1-(k-.3)/.7)))); s.g.rotation.y+=dt*14; if(k>=1){ s.g.visible=false; s.pop=0; } continue; }
+    if(!s.g.visible) continue;
+    const ph=(t+s.k)%5; s.tw.material.opacity=ph<.7?Math.sin(ph/.7*Math.PI)*.9:0; s.tw.material.rotation=t;
+    if(!story&&!touring){ const p=ipanAt(s); if(Math.hypot(wrapNear(p.x,P.x)-P.x,p.z-P.z)<(driving?2.6:1.7)&&Math.abs((driving?CAR.y:P.y)-p.y)<1.8) findIpan(s); } }
+  if(!story&&!touring&&!talking){ chatT-=dt; if(chatT<0){ chatT=9+Math.random()*8; const c=ctx(); const cand=npcs.filter(n=>n.p.g.visible&&n.mode==='stroll'&&Math.hypot(wrapNear(n.p.g.position.x,P.x)-P.x,n.p.g.position.z-P.z)<16);
+      if(cand.length){ const n=cand[Math.floor(Math.random()*cand.length)]; bubbleAt(n,CHAT[Math.floor(Math.random()*CHAT.length)](c)); } } }
+}
+
+/* ---- Ticket Rush, the arcade game ---- */
+let arcOn=false;
+const AW=420, AH=560, arcC=$('arcC'), ag=arcC.getContext('2d'); arcC.width=AW*2; arcC.height=AH*2;
+const AR={st:'menu',t:30,score:0,items:[],pops:[],bx:AW/2,tx:AW/2,l:false,r:false,boost:0,spawn:0,shake:0,last:0,best:+(store.get('ipan-arcade')||0)};
+const TKT=[['BUG','#f7a8c4'],['FEATURE','#9fd3f7'],['HELP','#ffe08a'],['UX','#9ee0c8'],['DATA','#c9b2f2']];
+function openArcade(){ if(arcOn) return; arcOn=true; closeSheet(); endTalk(); P.target=null; for(const k in keys) keys[k]=false;
+  $('arcade').classList.add('on'); arcMenu(); AR.last=performance.now(); requestAnimationFrame(arcLoop); sfx.arrive(); }
+function closeArcade(){ arcOn=false; AR.st='menu'; $('arcade').classList.remove('on'); clock.getDelta(); canvas.focus({preventScroll:true}); }
+function arcHud(){ $('arcScore').textContent=AR.score; $('arcTime').textContent=Math.ceil(Math.max(0,AR.t))+'s'; }
+function arcMsg(html){ const m=$('arcMsg'); m.innerHTML=html; m.hidden=!html; const go=$('arcGo'), back=$('arcBack'); if(go){ go.onclick=arcStart; go.focus({preventScroll:true}); } if(back) back.onclick=closeArcade; }
+function arcMenu(){ AR.st='menu'; AR.items=[]; AR.pops=[]; arcHud();
+  arcMsg(`<h3>Ticket Rush</h3><p>Catch the support tickets before they hit the floor. Dodge the scope creep. Grab the gold Ship it for double points.</p><p class="k">${touchy?'Drag to move':'Arrow keys, A and D, or the mouse'} · 30 seconds</p><button id="arcGo">Start</button>`); }
+function arcStart(){ Object.assign(AR,{st:'play',t:30,score:0,items:[],pops:[],boost:0,spawn:.4,shake:0}); arcMsg(''); arcHud(); sfx.beep(); }
+function arcEnd(){ AR.st='end'; const s=AR.score, nb=s>AR.best; if(nb){ AR.best=s; store.set('ipan-arcade',s); }
+  const rank=s<12?'Intern':s<25?'Support engineer':s<40?'Product owner':'Founder mode';
+  arcMsg(`<small>${nb?'New best':'Best: '+AR.best}</small><h3>${s} tickets</h3><p><b>${rank}.</b> This is roughly my day job: I own the backlog for MagEtegra and MagNicas at MAGNET, and I say no to scope creep, politely.</p><div class="row"><button id="arcGo">Play again</button><button class="alt" id="arcBack">Back to the street</button></div>`); sfx.win(); }
+function arcKey(k,down,e){ if(['arrowleft','arrowright',' '].includes(k)) e.preventDefault();
+  if(k==='arrowleft'||k==='a') AR.l=down; if(k==='arrowright'||k==='d') AR.r=down;
+  if(!down) return; if(k==='escape') closeArcade(); else if((k==='enter'||k===' ')&&AR.st!=='play') arcStart(); }
+const arcPt=e=>{ const r=arcC.getBoundingClientRect(); AR.tx=(e.clientX-r.left)/r.width*AW; };
+arcC.addEventListener('pointermove',arcPt); arcC.addEventListener('pointerdown',e=>{ arcPt(e); arcC.setPointerCapture(e.pointerId); });
+$('arcX').onclick=closeArcade; $('arcade').addEventListener('pointerdown',e=>{ if(e.target.id==='arcade') closeArcade(); });
+function arcLoop(now){ if(!arcOn) return; const dt=Math.min(.05,(now-AR.last)/1000); AR.last=now; arcStep(dt); arcDraw(now/1000); requestAnimationFrame(arcLoop); }
+function arcStep(dt){ AR.shake=Math.max(0,AR.shake-dt); AR.boost=Math.max(0,AR.boost-dt);
+  for(let i=AR.pops.length-1;i>=0;i--){ const p=AR.pops[i]; p.life-=dt; p.y-=40*dt; if(p.life<=0) AR.pops.splice(i,1); }
+  if(AR.st!=='play') return;
+  AR.t-=dt; if(AR.t<=0){ AR.t=0; arcHud(); arcEnd(); return; }
+  const kx=(AR.r?1:0)-(AR.l?1:0); if(kx){ AR.bx+=kx*470*dt; AR.tx=AR.bx; } else AR.bx+=(AR.tx-AR.bx)*Math.min(1,dt*16); AR.bx=clamp(AR.bx,50,AW-50);
+  const heat=1-AR.t/30; AR.spawn-=dt;
+  if(AR.spawn<0){ AR.spawn=.6-.32*heat; const r=Math.random(), ship=r<.07&&AR.t<27&&!AR.items.some(o=>o.k==='ship'), creep=!ship&&r<.3;
+    AR.items.push({k:ship?'ship':creep?'creep':'tkt',x:34+Math.random()*(AW-68),y:-30,vy:(150+170*heat+Math.random()*40)*(ship?1.3:1),tk:TKT[Math.floor(Math.random()*TKT.length)],w:Math.random()*6}); }
+  for(let i=AR.items.length-1;i>=0;i--){ const o=AR.items[i]; o.y+=o.vy*dt; if(o.k==='creep') o.x+=Math.sin(AR.t*4+o.w)*40*dt;
+    if(o.y>494&&o.y<536&&Math.abs(o.x-AR.bx)<56){ AR.items.splice(i,1);
+      if(o.k==='creep'){ AR.score=Math.max(0,AR.score-3); AR.shake=.35; sfx.buzz(); AR.pops.push({x:o.x,y:480,txt:'-3 scope creep',col:'#ff6b6b',life:.9}); }
+      else if(o.k==='ship'){ AR.boost=5; sfx.win(); AR.pops.push({x:o.x,y:480,txt:'Ship it! x2',col:'#ffd27a',life:1.1}); }
+      else { const n=AR.boost>0?2:1; AR.score+=n; blip(520+Math.min(AR.score,40)*14,.09,'triangle',.05); AR.pops.push({x:o.x,y:480,txt:'+'+n,col:o.tk[1],life:.6}); }
+      arcHud(); continue; }
+    if(o.y>AH+40) AR.items.splice(i,1); }
+  arcHud(); }
+function arcDraw(t){ const g=ag; g.setTransform(2,0,0,2,0,0); g.save(); if(AR.shake>0) g.translate((Math.random()-.5)*AR.shake*28,(Math.random()-.5)*AR.shake*28);
+  g.fillStyle='#0d0a16'; g.fillRect(-20,-20,AW+40,AH+40);
+  const gr=g.createLinearGradient(0,AH-220,0,AH); gr.addColorStop(0,'rgba(255,79,163,0)'); gr.addColorStop(1,AR.boost>0?'rgba(255,210,122,.35)':'rgba(255,79,163,.28)'); g.fillStyle=gr; g.fillRect(0,AH-220,AW,220);
+  g.strokeStyle='rgba(79,227,255,.09)'; g.lineWidth=1; const off=(t*40)%28; for(let y=off;y<AH;y+=28){ g.beginPath(); g.moveTo(0,y); g.lineTo(AW,y); g.stroke(); } for(let x=14;x<AW;x+=28){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,AH); g.stroke(); }
+  g.textAlign='center'; g.textBaseline='middle';
+  for(const o of AR.items){ g.save(); g.translate(o.x,o.y);
+    if(o.k==='tkt'){ g.rotate(Math.sin(t*3+o.w)*.12); g.fillStyle='#fffdf9'; rr(g,-30,-19,60,38,7); g.fill(); g.fillStyle=o.tk[1]; rr(g,-30,-19,60,12,7); g.fill(); g.fillRect(-30,-12,60,5);
+      g.fillStyle='#2b2433'; g.font=`700 ${o.tk[0].length>4?10:12}px ${FB}`; g.fillText(o.tk[0],0,6); }
+    else if(o.k==='creep'){ g.shadowColor='#ff3b5c'; g.shadowBlur=14; g.fillStyle='#e0345a'; g.beginPath(); for(let a=0;a<12;a++){ const r=19+Math.sin(a*2.3+t*8)*3; g.lineTo(Math.cos(a/12*6.283)*r,Math.sin(a/12*6.283)*r); } g.closePath(); g.fill(); g.shadowBlur=0;
+      g.fillStyle='#fff'; [-7,7].forEach(x=>{ g.beginPath(); g.arc(x,-3,5,0,7); g.fill(); }); g.fillStyle='#2b2433'; [-6,8].forEach(x=>{ g.beginPath(); g.arc(x,-2,2.4,0,7); g.fill(); });
+      g.font=`800 9px ${FB}`; g.fillStyle='#ffd0da'; g.fillText('SCOPE',0,10); }
+    else { g.rotate(t*2); g.shadowColor='#ffd27a'; g.shadowBlur=22; g.fillStyle='#ffd23f'; g.beginPath(); for(let i=0;i<10;i++){ const a=i/10*6.283-Math.PI/2, r=i%2?10:22; g.lineTo(Math.cos(a)*r,Math.sin(a)*r); } g.closePath(); g.fill(); g.shadowBlur=0; g.rotate(-t*2);
+      g.font=`800 9px ${FB}`; g.fillStyle='#ffd27a'; g.fillText('SHIP IT',0,32); }
+    g.restore(); }
+  const bx=AR.bx, by=516, bc=AR.boost>0?'#ffd27a':'#4fe3ff';
+  g.fillStyle='#e2a978'; g.beginPath(); g.arc(bx,by-22,15,0,7); g.fill(); g.fillStyle='#251b16'; g.beginPath(); g.arc(bx,by-24,16,Math.PI*1.05,Math.PI*1.95); g.closePath(); g.fill();
+  g.fillRect(bx-6,by-21,3,4); g.fillRect(bx+4,by-21,3,4);
+  g.shadowColor=bc; g.shadowBlur=18; g.fillStyle=bc; rr(g,bx-52,by-8,104,24,10); g.fill(); g.shadowBlur=0; g.fillStyle='#0d0a16'; g.font=`800 11px ${FB}`; g.fillText('BACKLOG',bx,by+5);
+  for(const p of AR.pops){ g.globalAlpha=clamp01(p.life*2); g.fillStyle=p.col; g.font=`700 16px ${FH}`; g.fillText(p.txt,p.x,p.y); } g.globalAlpha=1;
+  g.restore(); }
+
 function mergeStatic(){
   S.updateMatrixWorld(true); scene.updateMatrixWorld(true);
   const hid=new T.MeshBasicMaterial({visible:false});
@@ -1689,6 +1937,7 @@ mergeStatic();
 const keys={}; let jumpBuf=0, jumpHeld=false;
 addEventListener('keydown',e=>{ if(e.target.closest&&e.target.closest('input,textarea')) return; const k=e.key.toLowerCase();
   if(e.target.tagName==='BUTTON'&&(k==='enter'||k===' ')) return;
+  if(arcOn){ arcKey(k,true,e); return; }
   if(story) return;
   if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();
   if(sndOn) audio();
@@ -1701,7 +1950,7 @@ addEventListener('keydown',e=>{ if(e.target.closest&&e.target.closest('input,tex
   if(k==='m') openMap();
   if(k==='t') cycleClock();
   if(k==='h'&&driving) sfx.horn(); });
-addEventListener('keyup',e=>{ const k=e.key.toLowerCase(); keys[k]=false; if(k===' ') jumpHeld=false; });
+addEventListener('keyup',e=>{ const k=e.key.toLowerCase(); if(arcOn) arcKey(k,false,e); keys[k]=false; if(k===' ') jumpHeld=false; });
 addEventListener('blur',()=>{ for(const k in keys) keys[k]=false; jumpHeld=false; });
 const joy={x:0,z:0,id:null}; const joyEl=$('joy'), knob=$('knob');
 function joyMove(e){ const r=joyEl.getBoundingClientRect(); let dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2); const m=Math.hypot(dx,dy), mx=r.width/2; if(m>mx){ dx*=mx/m; dy*=mx/m; } knob.style.transform=`translate(${dx}px,${dy}px)`; joy.x=dx/mx; joy.z=dy/mx; }
@@ -1725,6 +1974,7 @@ const ray=new T.Raycaster(), ndc=new T.Vector2(), gBall=new T.Sphere(new T.Vecto
 let pendingOpen=null;
 function tapAt(cx,cy){
   if(driving||talking||touring||story) return;
+  if(tapIpan(cx,cy)) return;
   ndc.set(cx/innerWidth*2-1,-(cy/innerHeight)*2+1); ray.setFromCamera(ndc,camera);
   /* the click boxes live in flat street space: stand each one on the globe just for this test */
   const saved=pickables.map(o=>[o.position.clone(),o.quaternion.clone()]);
@@ -1754,7 +2004,7 @@ function interact(){
   if(talking){ nextLine(); return; }
   if(driving){ exitCar(); return; }
   if(!act) return;
-  if(act.type==='car') enterCar(); else if(act.type==='npc') startTalk(act.n); else if(act.type==='cat') petCat(); else if(act.type==='place'&&!openId) openSheet(act.id);
+  if(act.type==='car') enterCar(); else if(act.type==='npc') startTalk(act.n); else if(act.type==='cat') petCat(); else if(act.type==='place'&&!openId) openSheet(act.id); else if(act.type==='fn') act.fn();
 }
 
 /* travel */
@@ -1765,6 +2015,7 @@ function travelTo(x,z,face,after){ if(fading) return; fading=true; $('fade').sty
 function travel(id){
   if(touring) endTour();
   if(id==='course') return travelTo(13.6,13.2,Math.atan2(1.9,1.3));
+  if(id==='arcade') return travelTo(ARC_POS.x,ARC_POS.z+2,Math.PI);
   if(id==='car') return travelTo(CAR.x-Math.cos(CAR.h)*2.2,CAR.z+Math.sin(CAR.h)*2.2,CAR.h);
   const p=PB[id]; travelTo(p.door[0],p.door[1],Math.atan2(p.look[0]-p.door[0],p.look[2]-p.door[1]),()=>openSheet(id));
 }
@@ -1793,7 +2044,7 @@ const mx=x=>(x-MAP.x0)*MS, mz=z=>(z-MAP.z0)*MS;
 }
 const miniC=$('miniC'), mg=miniC.getContext('2d');
 const LBLZ={pautika:-15,mahardika:-9.5,santaka:-15,hq:-9.5,arogya:-15,rumika:-9.5,work:-15};
-const MPLACES=[...ALL.map(p=>({id:p.id,name:p.name,col:p.col,x:p.door[0],z:LBLZ[p.id]??p.door[1]})),{id:'course',name:'Jump course',col:'#e6a83a',x:20,z:18},{id:'car',name:'Car',col:'#3a6fb0',x:0,z:0}];
+const MPLACES=[...ALL.map(p=>({id:p.id,name:p.name,col:p.col,x:p.door[0],z:LBLZ[p.id]??p.door[1]})),{id:'course',name:'Jump course',col:'#e6a83a',x:20,z:18},{id:'arcade',name:'Arcade',col:'#ff4fa3',x:ARC_POS.x,z:ARC_POS.z},{id:'car',name:'Car',col:'#3a6fb0',x:0,z:0}];
 function drawMini(){
   const Wd=miniC.width, R=Wd/2, ppu=Wd/(driving?70:54), rot=driving?(-Math.PI/2-Math.atan2(Math.cos(CAR.h),Math.sin(CAR.h))):0, cs=Math.cos(rot), sn=Math.sin(rot);
   const to=(x,z)=>{ const dx=(wrapNear(x,P.x)-P.x)*ppu, dy=(z-P.z)*ppu; return [R+dx*cs-dy*sn, R+dx*sn+dy*cs]; };
@@ -1985,7 +2236,7 @@ $('sMail').onclick=async()=>{ const b=$('sMail'); try{ await navigator.clipboard
 function enterWalk(id){ if(!story) return; story=false; document.body.classList.remove('story','sdark'); setFocus(null);
   setClock('live'); wxMode='auto'; walkIn=reduce?0:1.6; $('backStory').hidden=false;
   $('hint').style.opacity=1; setTimeout(()=>{ if(moved) $('hint').style.opacity=0; },7000);
-  if(id) setTimeout(()=>travel(id),reduce?0:700); else canvas.focus({preventScroll:true}); }
+  if(id) setTimeout(()=>travel(id),reduce?0:700); else canvas.focus({preventScroll:true}); setTimeout(ipanIntro,9000); }
 function enterStory(top){ if(story) return; closeSheet(); endTalk(); if(touring) endTour(); if(mapOpen) closeMap(); if(driving) exitCar(); P.target=null;
   story=true; wxMode='clear'; document.body.classList.add('story'); $('backStory').hidden=true; measure(); if(top) storyEl.scrollTop=0; storyEl.focus({preventScroll:true}); }
 $('sSnd').onclick=()=>setSnd(!sndOn);
@@ -2027,6 +2278,7 @@ function blocks(x,z,r){ if(tourCam||story) return false; const ax=camPos.x, az=c
   const k=((x-ax)*vx+(z-az)*vz)/L2; return k>-.1&&k<.9&&Math.hypot(ax+vx*k-x,az+vz*k-z)<r; }
 
 function frame(){
+  if(arcOn){ clock.getDelta(); requestAnimationFrame(frame); return; } /* the arcade has the screen: the street waits */
   const raw=clock.getDelta(), dt=Math.min(raw,.05), t=clock.elapsedTime; frameN++;
   const now=sceneNow();
   /* ---- sky, sun, weather ---- */
@@ -2162,15 +2414,17 @@ function frame(){
   for(let i=dust.length-1;i>=0;i--){ const d=dust[i]; d.life-=dt; const k=1-d.life/d.max; d.m.scale.setScalar(1+k*d.grow); d.m.material.opacity=Math.max(0,d.life/d.max)*.75; d.m.position.y+=dt*d.rise; if(d.life<=0){ scene.remove(d.m); d.m.material.dispose(); dust.splice(i,1); } }
   for(let i=confetti.length-1;i>=0;i--){ const c=confetti[i]; c.life-=dt; c.vy-=12*dt; c.m.position.x+=c.vx*dt; c.m.position.y+=c.vy*dt; c.m.position.z+=c.vz*dt; c.m.rotation.x+=c.spin*dt; c.m.rotation.y+=c.spin*.7*dt; if(c.life<=0||c.m.position.y<0){ scene.remove(c.m); confetti.splice(i,1); } }
 
+  playTick(dt,t);
   /* ---- what can I do here ---- */
   let best_=null,bd=1e9; if(!driving) for(const p of ALL){ const d=Math.hypot(P.x-p.door[0],P.z-p.door[1]); if(d<p.r&&d<bd&&P.y<1){ bd=d; best_=p; } }
-  nearId=best_?best_.id:null; act=null;
+  nearId=best_?best_.id:null; act=null; let xa=null;
   if(touring){}
   else if(driving) act={type:'exit',label:'Get out of the car',col:'#e0a43a'};
   else if(!talking){ let bn=null,bnd=2.6; talkers.forEach(n=>{ if(!n.p.g.visible) return; const d=Math.hypot(P.x-n.p.g.position.x,P.z-n.p.g.position.z); if(d<bnd&&P.y<1.5){ bnd=d; bn=n; } });
     const dc=Math.hypot(P.x-CAR.x,P.z-CAR.z), dcat=Math.hypot(P.x-cat.position.x,P.z-cat.position.z);
     if(bn) act={type:'npc',n:bn,label:'Talk to '+bn.name,col:bn.col};
     else if(dc<3.3&&P.y<1) act={type:'car',label:'Drive the car',col:'#e0a43a'};
+    else if((xa=extraAct())) act=xa;
     else if(best_&&!openId) act={type:'place',id:best_.id,label:best_.cta,col:best_.col};
     else if(dcat<1.9&&P.y<1&&CT.sit>.6&&!openId) act={type:'cat',label:'Pet Oyen',col:'#e9973e'}; }
   if(act&&!mapOpen){ $('promptTxt').textContent=act.label; $('prompt').classList.remove('hide'); if(!openId) setAccent(act.col); } else $('prompt').classList.add('hide');
@@ -2300,11 +2554,11 @@ snapSky(sunVec(sceneNow()).el,wcur); lightDir.set(0,1,0);
 $('hint').textContent = touchy ? 'Drag the stick to walk. Tap Jump to jump. Tap the round map to see everything.' : 'WASD to walk · Space to jump · E to go in or talk · M for the map';
 $('loading').classList.add('gone');
 if(story){ storyTick(.016); sProg=Math.round(sProg); snapCam(); if(!reduce&&storyEl.scrollTop<10){ camPos.y+=120; camPos.z+=160; } storyEl.focus({preventScroll:true}); }
-else { snapCam(); $('backStory').hidden=false; }
+else { snapCam(); $('backStory').hidden=false; setTimeout(ipanIntro,9000); }
 $('brand').style.cursor='pointer'; $('brand').title='Back to the story'; $('brand').onclick=()=>enterStory(true);
 requestAnimationFrame(frame);
 preFinish();
-window.__dbg={snapCam,enterWalk,enterStory,get story(){return story;},get sProg(){return sProg;},P,CAR,DS,W,travel,openSheet,setClock,get wx(){return wxMode;},set wx(v){wxMode=v;},enterCar,exitCar,openMap,closeMap,startTalk,talkers,npcs,interact,startTour,endTour,tourNext,get touring(){return touring;},renderer,scene,tried};
+window.__dbg={snapCam,enterWalk,enterStory,get story(){return story;},get sProg(){return sProg;},P,CAR,DS,W,travel,openSheet,setClock,get wx(){return wxMode;},set wx(v){wxMode=v;},enterCar,exitCar,openMap,closeMap,startTalk,talkers,npcs,interact,startTour,endTour,tourNext,get touring(){return touring;},renderer,scene,tried,IPANS,findIpan,openArcade,closeArcade,AR,FAV,get arcOn(){return arcOn;}};
 }
 const go=()=>{ try{ build(); }catch(err){ console.error(err); noGL(); } };
 Promise.race([document.fonts?document.fonts.ready:Promise.resolve(), new Promise(r=>setTimeout(r,1800))]).then(go);
