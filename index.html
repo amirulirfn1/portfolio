@@ -1,7 +1,11 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ipan · Amirul Irfan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Nunito:wght@400;600;700;800&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 /* Layout concept: a miniature Kuala Lumpur shophouse street seen like a tilt-shift diorama.
@@ -248,12 +252,239 @@ body.touring #tour{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 .pol b{font:700 .74rem/1 var(--f-body);padding:5px 8px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}
 .pol b.ok{background:#e1f4e8;color:#2f8f5e}
 #quest{font:700 .7rem/1 var(--f-body);color:var(--muted);margin-top:3px;display:block}
+
+/* ============ story layer: the landing page that scrolls round the globe ============ */
+:root{--f-disp:"Instrument Serif","Times New Roman",Georgia,serif;--s-ink:#1d1823;--s-paper:#fbf6ee;--gold:#d99a2b}
+body.story .fadeable,body.story #tour,body.story #toast,body.story #bubble,body.story #talk,body.story #azan,body.story #prompt{opacity:0!important;pointer-events:none!important}
+body:not(.story) .sOnly,body:not(.story) #story{display:none!important}
+#story{position:fixed;inset:0;z-index:8;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;outline:none;color:var(--s-ink);-webkit-user-select:text;user-select:text}
+#story::-webkit-scrollbar{display:none}
+body.sdark #story{color:var(--s-paper)}
+.ch{position:relative;height:160vh;height:160svh}
+.ch.hero{height:150vh;height:150svh}
+.ch.last{height:auto;min-height:100vh;min-height:100svh}
+.pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;padding:72px 6vw 24px}
+.ch.last .pin{position:relative;height:auto;min-height:100vh;min-height:100svh;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16vh 6vw 0}
+.txt{max-width:min(600px,44vw)}
+.kick{display:flex;align-items:center;gap:12px;font:800 .74rem/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
+.kick b{color:var(--gold);font-weight:800}
+.kick:before{content:"";width:34px;height:1px;background:currentColor;opacity:.5}
+.ch h1,.ch h2{font:400 clamp(44px,6vw,96px)/.98 var(--f-disp);letter-spacing:-.015em;margin:0 0 24px;text-wrap:balance}
+.ch h2.sm{font-size:clamp(40px,4.4vw,70px);margin-bottom:16px}
+.ch h1{font-size:clamp(68px,12.5vw,210px);line-height:.86;letter-spacing:-.03em;margin-bottom:28px}
+.ch h1 em,.ch h2 em{font-style:italic;color:var(--gold)}
+.ch p{font:500 1.08rem/1.62 var(--f-body);margin:0 0 14px;max-width:46ch}
+.ch p.big{font:400 clamp(1.25rem,1.7vw,1.6rem)/1.38 var(--f-disp);text-align:left;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chips span{font:700 .78rem/1 var(--f-body);padding:9px 13px;border-radius:999px;border:1px solid currentColor;opacity:.85}
+/* word and letter reveals */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.w>span{display:inline-block;transform:translateY(108%) rotate(4deg);transform-origin:0 100%;transition:transform 1.1s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0)*45ms + 80ms)}
+.ch.in .w>span{transform:none}
+.ch h1 .c{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.ch h1 .c:hover{transform:translateY(-14%) rotate(-4deg)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--d,0)*90ms + 320ms)}
+.ch.in .rv{opacity:1;transform:none}
+/* systems list */
+.sys{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid rgba(29,24,35,.18)}
+.sys li{position:relative;border-bottom:1px solid rgba(29,24,35,.18)}
+.sys li:before{content:"";position:absolute;inset:0;background:var(--c);transform:scaleX(0);transform-origin:0 50%;transition:transform .55s cubic-bezier(.16,1,.3,1);opacity:.16}
+.sys li.on:before{transform:scaleX(1)}
+.sys button{position:relative;display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:2px 14px;width:100%;border:0;background:none;padding:10px 4px;text-align:left}
+.sys .nm{font:400 clamp(1.5rem,2.1vw,2rem)/1 var(--f-disp);transition:transform .5s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:12px}
+.sys .nm i{width:10px;height:10px;border-radius:3px;transform:rotate(45deg);background:var(--c);flex:none}
+.sys li.on .nm{transform:translateX(10px)}
+.sys .wh{font:600 .86rem/1.3 var(--f-body);opacity:.75;grid-column:1}
+.sys .st{font:800 .66rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;grid-row:1;grid-column:2;opacity:.7}
+.sys .try{position:absolute;right:4px;bottom:12px;border:0;border-radius:999px;padding:8px 13px;font:700 .78rem/1 var(--f-body);background:var(--s-ink);color:var(--s-paper);opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .4s}
+.sys li.on .try,.sys .try:focus-visible{opacity:1;transform:none}
+.note2{font:600 .84rem/1.5 var(--f-body)!important;opacity:.7;margin-top:16px!important}
+.lk{display:inline-flex;align-items:center;gap:8px;font:700 .95rem/1 var(--f-body);color:inherit;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px;margin:10px 18px 0 0}
+.lk:hover{color:var(--gold)}
+ul.how{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;max-width:46ch}
+ul.how li{display:flex;gap:12px;font:600 .98rem/1.45 var(--f-body)}
+ul.how li b{font:400 1.05rem/1.3 var(--f-disp);color:var(--gold);min-width:1.6em}
+/* finale */
+.ch.last h2{font-size:clamp(64px,11vw,190px);line-height:.88;letter-spacing:-.03em}
+.ch.last p{margin-left:auto;margin-right:auto}
+#playWrap{position:relative;width:176px;height:176px;margin:26px auto 30px;display:grid;place-items:center}
+#playRing{position:absolute;inset:0;animation:spin 16s linear infinite;pointer-events:none}
+#playRing text{font:800 10.5px var(--f-body);letter-spacing:.32em;text-transform:uppercase;fill:currentColor}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cta{border:0;border-radius:50%;width:118px;height:118px;background:var(--gold);color:#1d1823;font:400 1.35rem/1.05 var(--f-disp);box-shadow:0 10px 40px rgba(217,154,43,.45);transition:transform .35s cubic-bezier(.3,1.4,.5,1),box-shadow .3s}
+.cta:hover{box-shadow:0 14px 60px rgba(217,154,43,.7)}
+.contact{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 8px;margin-bottom:6vh}
+.contact button.lk{background:none;border-left:0;border-right:0;border-top:0;cursor:pointer}
+.marq{width:100vw;overflow:hidden;padding:2vh 0 3vh;white-space:nowrap;transform:skewX(var(--skew,0deg));transition:transform .2s}
+.marq div{display:inline-block;animation:marq 38s linear infinite;font:400 clamp(56px,9vw,150px)/1 var(--f-disp);letter-spacing:-.02em}
+.marq span{padding:0 .35em}
+.marq span:nth-child(even){font-style:italic;color:transparent;-webkit-text-stroke:1px currentColor}
+.marq i{font-style:normal;color:var(--gold);font-size:.5em;vertical-align:middle}
+@keyframes marq{to{transform:translateX(-50%)}}
+.foot{font:700 .74rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;opacity:.6;padding:0 0 calc(env(safe-area-inset-bottom,0px) + 22px)}
+/* fixed story chrome */
+.scrim{position:fixed;inset:0;z-index:7;pointer-events:none;transition:opacity 1.2s}
+#scrimL{background:linear-gradient(90deg,rgba(251,246,238,.88) 0%,rgba(251,246,238,.62) 30%,rgba(251,246,238,0) 58%)}
+#scrimD{background:radial-gradient(ellipse at 50% 55%,rgba(16,12,22,.2) 0%,rgba(16,12,22,.62) 75%);opacity:0}
+body.sdark #scrimL{opacity:0} body.sdark #scrimD{opacity:1}
+body:not(.story) .scrim{opacity:0!important}
+#sTop{position:fixed;top:0;left:0;right:0;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 18px) 6vw 0;pointer-events:none;color:var(--s-ink);transition:color 1s,opacity .6s}
+body.sdark #sTop{color:var(--s-paper)}
+#sTop>*{pointer-events:auto}
+#sMark{display:flex;align-items:baseline;gap:14px;font:400 1.5rem/1 var(--f-disp);border:0;background:none;padding:0}
+#sMark small{font:800 .68rem/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+#sWalk{border:1px solid currentColor;background:none;border-radius:999px;padding:12px 18px;font:800 .78rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;display:flex;gap:10px;align-items:center;transition:background .3s,color .3s,transform .35s cubic-bezier(.3,1.4,.5,1)}
+#sWalk:hover{background:var(--s-ink);color:var(--s-paper)}
+body.sdark #sWalk:hover{background:var(--s-paper);color:var(--s-ink)}
+#sRail{position:fixed;right:2.4vw;top:50%;transform:translateY(-50%);z-index:9;display:grid;gap:14px;color:var(--s-ink);transition:color 1s}
+body.sdark #sRail{color:var(--s-paper)}
+#sRail button{border:0;background:none;padding:2px 0;display:flex;align-items:center;justify-content:flex-end;gap:10px;font:800 .64rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase}
+#sRail button span{opacity:0;transform:translateX(6px);transition:opacity .3s,transform .3s}
+#sRail button:hover span,#sRail button.on span{opacity:.9;transform:none}
+#sRail button i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.35;transition:all .4s}
+#sRail button.on i{opacity:1;height:22px;border-radius:3px;background:var(--gold)}
+#sBar{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--gold);z-index:10}
+#cue{position:absolute;left:6vw;bottom:5vh;display:flex;align-items:center;gap:14px;font:800 .68rem/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase}
+#cue i{width:1px;height:46px;background:currentColor;opacity:.3;position:relative;overflow:hidden}
+#cue i:after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--gold);animation:cue 1.8s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes cue{to{top:100%}}
+#cur,#curR{position:fixed;left:0;top:0;z-index:30;pointer-events:none;border-radius:50%;mix-blend-mode:difference;opacity:0;transition:opacity .3s}
+#cur{width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff}
+#curR{width:40px;height:40px;margin:-20px 0 0 -20px;border:1px solid #fff;transition:opacity .3s,width .35s,height .35s,margin .35s,background .35s}
+#curR.big{width:76px;height:76px;margin:-38px 0 0 -38px;background:rgba(255,255,255,.95)}
+body.fine.story #cur,body.fine.story #curR{opacity:1}
+body.fine.story #story,body.fine.story #story *,body.fine.story #sTop *,body.fine.story #sRail *{cursor:none}
+#grain{position:fixed;inset:-50%;z-index:11;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(4) infinite}
+body:not(.story) #grain{display:none}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-1%,3%)}}
+/* preloader */
+#pre{position:fixed;inset:0;z-index:40;background:#15111a;color:#fbf6ee;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 22px) 6vw calc(env(safe-area-inset-bottom,0px) + 26px);transition:transform 1.15s cubic-bezier(.76,0,.24,1)}
+#pre.done{transform:translateY(-101%)}
+#pre .r{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+#pre small{font:800 .7rem/1.4 var(--f-body);letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+#preN{font:400 clamp(110px,22vw,320px)/.8 var(--f-disp);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#preN em{color:#d99a2b}
+#preL{position:absolute;left:0;bottom:0;height:3px;width:100%;background:#d99a2b;transform-origin:0 50%;transform:scaleX(0)}
+#pre .ln{overflow:hidden}
+#pre .ln span{display:block;font:400 clamp(30px,4vw,56px)/1.05 var(--f-disp);animation:up 1s cubic-bezier(.16,1,.3,1) both}
+#pre .ln:nth-child(2) span{animation-delay:.12s;font-style:italic;color:#d99a2b}
+@keyframes up{from{transform:translateY(110%)}}
+#backStory{position:fixed;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:5;border:0;border-radius:999px;padding:9px 15px;font:700 .8rem/1 var(--f-body);background:rgba(29,24,35,.82);color:#fbf6ee}
+body.touch #backStory{bottom:auto;top:calc(var(--topH,120px) + 8px);right:12px}
+@media (max-width:820px){
+  .pin{align-items:flex-end;padding:0 22px 9vh}
+  .txt{max-width:100%}
+  .ch h2{font-size:clamp(40px,11vw,64px)}
+  .ch h1{font-size:clamp(64px,21vw,120px)}
+  .ch p{font-size:1rem}
+  #scrimL{background:linear-gradient(0deg,rgba(251,246,238,.95) 0%,rgba(251,246,238,.8) 34%,rgba(251,246,238,0) 64%)}
+  #sRail{display:none}
+  #sTop{padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 0}
+  #sMark small{display:none}
+  #sWalk{padding:10px 14px}
+  #cue{display:none}
+  .sys button{padding:8px 2px}
+  .ch p.big{font-size:1.08rem}
+  .hero .chips{margin-top:14px}
+  .hero .chips span{padding:7px 10px;font-size:.72rem}
+  .ch h1{margin-bottom:16px}
+  .sys .try{opacity:1;transform:none;position:static;grid-column:1/-1;justify-self:start;margin-top:6px;display:none}
+  .sys li.on .try{display:block}
+}
+@media (prefers-reduced-motion: reduce){
+  .w>span,.rv{transform:none!important;opacity:1!important}
+  #playRing,.marq div,#grain,#cue i:after,#pre .ln span{animation:none!important}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
 <canvas id="gl" tabindex="0" aria-label="A small 3D street in Kuala Lumpur. DaulatLabs is in the middle and each shop runs a small demo of one of its systems. Use the place buttons at the top to open each one."></canvas>
 <div class="lb" id="lbTop"></div><div class="lb" id="lbBot"></div>
 <div class="ui" id="fade"></div>
+<div id="pre" aria-hidden="true">
+  <div class="r"><small>Amirul Irfan<br>Kuala Lumpur</small><small>Building a small planet</small></div>
+  <div><div class="ln"><span>Me myself,</span></div><div class="ln"><span>but professionally.</span></div></div>
+  <div class="r"><div id="preN">000</div><small id="preT">Loading</small></div>
+  <div id="preL"></div>
+</div>
+<div class="scrim" id="scrimL"></div><div class="scrim" id="scrimD"></div>
+<div id="grain" aria-hidden="true"></div>
+<div class="sOnly" id="sBar"></div>
+<div class="sOnly" id="sTop">
+  <button id="sMark" aria-label="Back to the top">Ipan <small id="sClk">Kuala Lumpur</small></button>
+  <button id="sWalk" class="mag">Walk the street <span aria-hidden="true">→</span></button>
+</div>
+<nav class="sOnly" id="sRail" aria-label="Sections"></nav>
+<div id="cur" aria-hidden="true"></div><div id="curR" aria-hidden="true"></div>
+<main id="story" tabindex="-1" aria-label="Amirul Irfan, landing page">
+  <section class="ch hero" data-k="Intro"><div class="pin"><div class="txt">
+    <div class="kick rv" style="--d:0"><b>Portfolio</b> Kuala Lumpur, 2026</div>
+    <h1 class="split-c">Amirul <em>Irfan</em></h1>
+    <p class="big rv" style="--d:1">Me myself, but professionally. Most people call me Ipan. I'm building DaulatLabs, and by day I'm a product owner at MAGNET.</p>
+    <div class="chips rv" style="--d:2"><span>Founder, DaulatLabs</span><span>Software Product Owner</span><span>Kuala Lumpur</span></div>
+  </div><div id="cue"><i></i>Scroll to fly in</div></div></section>
+
+  <section class="ch" data-k="DaulatLabs"><div class="pin"><div class="txt">
+    <div class="kick rv"><b>01</b> DaulatLabs</div>
+    <h2 class="split">Software for the shops that keep a neighbourhood <em>running.</em></h2>
+    <p class="rv" style="--d:1">DaulatLabs makes systems for restaurants, clinics, insurance agencies and residential communities. A business starts with one, and the rest plug into the same foundation when it is ready.</p>
+    <p class="rv note2" style="--d:2">Founder-led, based in Kuala Lumpur. Production is truth: we do not sell what is not real.</p>
+    <a class="lk rv" style="--d:3" href="https://www.daulatlabs.com/" target="_blank" rel="noopener">daulatlabs.com <span aria-hidden="true">↗</span></a>
+  </div></div></section>
+
+  <section class="ch" data-k="Systems"><div class="pin"><div class="txt">
+    <div class="kick rv"><b>02</b> The systems</div>
+    <h2 class="split sm">Five systems, one <em>street.</em></h2>
+    <ul class="sys rv" style="--d:1" id="sysList"></ul>
+    <p class="rv note2" style="--d:2">Every shop on the street runs a small toy version you can try. Point at a name to fly over to it.</p>
+  </div></div></section>
+
+  <section class="ch" data-k="Identity"><div class="pin"><div class="txt">
+    <div class="kick rv"><b>03</b> One identity</div>
+    <h2 class="split">Every system writes to the same <em>record.</em></h2>
+    <p class="rv" style="--d:1">The gold line on the pavement is the identity layer. Order at the restaurant, take a number at the clinic, register at the guardhouse, and it is all one customer, not five copies of them.</p>
+    <p class="rv note2" style="--d:2">Watch the pulses run home to DaulatLabs. When you walk the street, your own trail shows up on the screen there.</p>
+  </div></div></section>
+
+  <section class="ch" data-k="Day job"><div class="pin"><div class="txt">
+    <div class="kick rv"><b>04</b> Day job</div>
+    <h2 class="split">Software Product Owner at <em>MAGNET</em> Security &amp; Automation.</h2>
+    <p class="rv" style="--d:1">I started in support and moved into product. Now I look after MagEtegra and MagNicas.</p>
+    <p class="rv note2" style="--d:2">Before that: Process &amp; Systems Analyst intern at SLB, where reporting got 30% faster, and IT support at CTC Global.</p>
+  </div></div></section>
+
+  <section class="ch" data-k="About"><div class="pin"><div class="txt">
+    <div class="kick rv"><b>05</b> About me</div>
+    <h2 class="split">I like problems you can walk <em>up to.</em></h2>
+    <p class="rv" style="--d:1">Door readers, front desks, kitchens, clinics. That is where software meets the real world, and where I like to work.</p>
+    <ul class="how rv" style="--d:2">
+      <li><b>i.</b>Start from the support queue. Real tickets say more than opinions.</li>
+      <li><b>ii.</b>Write it down: specs, user stories, acceptance criteria.</li>
+      <li><b>iii.</b>Data before arguments. SQL and Power BI every week.</li>
+      <li><b>iv.</b>Ship small, then check it in production.</li>
+    </ul>
+    <p class="rv note2" style="--d:3">BCS Computer Networks &amp; Security, UTM, 2025 · CompTIA Data+ · First place, National Consumer Intellectual Challenge 2024</p>
+  </div></div></section>
+
+  <section class="ch last" data-k="Walk"><div class="pin">
+    <div class="kick rv" style="justify-content:center"><b>06</b> Your turn</div>
+    <h2 class="split">Come walk the <em>street.</em></h2>
+    <p class="rv" style="--d:1">Every shop runs a toy demo. Walk in, try one, and watch your trail reach DaulatLabs. There is a car, a jump course and a cat.</p>
+    <div id="playWrap" class="rv" style="--d:2">
+      <svg id="playRing" viewBox="0 0 176 176" aria-hidden="true"><defs><path id="ringP" d="M88,88 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#ringP">Walk the street · try the demos · say hello · </textPath></text></svg>
+      <button class="cta mag" id="sPlay">Walk the<br><em>street</em></button>
+    </div>
+    <div class="contact rv" style="--d:3">
+      <button class="lk" id="sMail">amirulirfan.utm@gmail.com <span aria-hidden="true">⧉</span></button>
+      <a class="lk" href="https://linkedin.com/in/amirulirfn" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      <a class="lk" href="https://github.com/amirulirfn1" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="lk" href="https://www.daulatlabs.com/" target="_blank" rel="noopener">daulatlabs.com <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="marq" aria-hidden="true"><div id="marqIn"></div></div>
+    <div class="foot">Made in Kuala Lumpur · © 2026 Amirul Irfan</div>
+  </div></section>
+</main>
+<button class="ui" id="backStory" hidden>↑ Back to the story</button>
 
 <div class="ui fadeable" id="top">
   <div class="card" id="brand"><div class="av" aria-hidden="true"></div><div><b>Amirul Irfan</b><span class="sub">Founder, DaulatLabs</span><span id="quest"></span></div></div>
@@ -302,6 +533,18 @@ const touchy = matchMedia('(pointer:coarse)').matches;
 const small = innerWidth < 700;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (touchy) document.body.classList.add('touch');
+const fine = matchMedia('(pointer:fine)').matches && !reduce;
+if (fine) document.body.classList.add('fine');
+const walkFirst = /(^|[?#&])walk\b/.test(location.search+location.hash);
+if (!walkFirst) document.body.classList.add('story');
+/* preloader: counts up while the street is built, then lifts away */
+const PRE={n:0, target:82, done:false, t0:performance.now()};
+(function preTick(){ if(!$('pre')||(PRE.done&&PRE.n>=99.5)) return; PRE.n+=(PRE.target-PRE.n)*(PRE.done?.2:.035);
+  const v=Math.min(100,Math.round(PRE.n)); $('preN').innerHTML=v>=100?'1<em>00</em>':String(v).padStart(3,'0'); $('preL').style.transform=`scaleX(${v/100})`;
+  requestAnimationFrame(preTick); })();
+function preFinish(after){ PRE.done=true; PRE.target=100; const wait=Math.max(0,(reduce?200:1300)-(performance.now()-PRE.t0));
+  setTimeout(()=>{ $('preN').innerHTML='1<em>00</em>'; $('preL').style.transform='scaleX(1)'; $('preT').textContent='Ready';
+    setTimeout(()=>{ $('pre').classList.add('done'); if(after) after(); setTimeout(()=>$('pre').remove(),1300); },reduce?50:380); },wait); }
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -613,7 +856,7 @@ updateQuest();
 
 const hasGL = (()=>{ try{ const c=document.createElement('canvas'); return !!(window.THREE && (c.getContext('webgl')||c.getContext('experimental-webgl'))); }catch(e){ return false; } })();
 updateHud();
-function noGL(){ ['gl','joy','hint','loading','mini','jumpBtn','tour','lbTop','lbBot'].forEach(i=>{ if($(i)) $(i).style.display='none'; }); document.body.classList.remove('touring'); $('hud').onclick=()=>openSheet('surau'); $('nogl').style.display='grid'; openSheet('hq'); }
+function noGL(){ preFinish(); document.querySelectorAll('.ch').forEach(c=>c.classList.add('in')); ['sWalk','sPlay'].forEach(i=>$(i).onclick=()=>document.body.classList.remove('story')); ['gl','joy','hint','loading','mini','jumpBtn','tour','lbTop','lbBot'].forEach(i=>{ if($(i)) $(i).style.display='none'; }); document.body.classList.remove('touring'); $('hud').onclick=()=>openSheet('surau'); $('nogl').style.display='grid'; openSheet('hq'); }
 if(!hasGL){ noGL(); return; }
 function build(){
 const T = THREE;
@@ -1367,6 +1610,7 @@ mergeStatic();
 const keys={}; let jumpBuf=0, jumpHeld=false;
 addEventListener('keydown',e=>{ if(e.target.closest&&e.target.closest('input,textarea')) return; const k=e.key.toLowerCase();
   if(e.target.tagName==='BUTTON'&&(k==='enter'||k===' ')) return;
+  if(story) return;
   if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k)) e.preventDefault();
   if(sndOn) audio();
   const rep=e.repeat; keys[k]=true; if(rep) return;
@@ -1401,7 +1645,7 @@ canvas.addEventListener('wheel',e=>{ e.preventDefault(); zoom=Math.min(1.6,Math.
 const ray=new T.Raycaster(), ndc=new T.Vector2(), gBall=new T.Sphere(new T.Vector3(0,-GR,ZC),GR), hit=new T.Vector3();
 let pendingOpen=null;
 function tapAt(cx,cy){
-  if(driving||talking||touring) return;
+  if(driving||talking||touring||story) return;
   ndc.set(cx/innerWidth*2-1,-(cy/innerHeight)*2+1); ray.setFromCamera(ndc,camera);
   /* the click boxes live in flat street space: stand each one on the globe just for this test */
   const saved=pickables.map(o=>[o.position.clone(),o.quaternion.clone()]);
@@ -1500,7 +1744,7 @@ function drawMap(){
   mapG.fillStyle='#fff'; mapG.font=`700 ${Math.round(r*1.1)}px Nunito, Arial`; mapG.textAlign='center'; mapG.textBaseline='middle'; mapG.fillText('You',x,y-r*2);
 }
 function sizeMap(){ const w=$('mapBox').clientWidth, d=Math.min(2,devicePixelRatio||1); mapC.width=Math.round(w*d); mapC.height=Math.round(w*d*base.height/base.width); }
-function openMap(which){ if(mapOpen||touring) return; mapOpen=true; endTalk(); $('map').classList.add('on'); sizeMap(); placePins(); refreshMapPanel(); drawMap(); if(which==='panel'&&innerWidth<820) setTimeout(()=>$('mapRight').scrollIntoView({block:'start'}),30); }
+function openMap(which){ if(mapOpen||touring||story) return; mapOpen=true; endTalk(); $('map').classList.add('on'); sizeMap(); placePins(); refreshMapPanel(); drawMap(); if(which==='panel'&&innerWidth<820) setTimeout(()=>$('mapRight').scrollIntoView({block:'start'}),30); }
 function closeMap(){ mapOpen=false; $('map').classList.remove('on'); }
 $('mapClose').onclick=closeMap;
 $('map').addEventListener('pointerdown',e=>{ if(e.target.id==='map') closeMap(); });
@@ -1552,6 +1796,7 @@ $('tourSkip').onclick=()=>endTour();
 let focusId=null;
 const camPos=new T.Vector3(), camLook=new T.Vector3();
 function desiredCam(){
+  if(story) return storyCam();
   const portrait=camera.aspect<.9;
   if(tourCam){ const L=tourCam.look.clone(), Cp=tourCam.pos.clone().sub(L).multiplyScalar(1.35).add(L); if(portrait){ Cp.sub(L).multiplyScalar(1.45).add(L); L.y-=2.2; } return [Cp,L]; }
   if(driving){ const fx=Math.sin(CAR.camH), fz=Math.cos(CAR.camH), k=zoom*(portrait?1.35:1);
@@ -1566,9 +1811,107 @@ function desiredCam(){
   return [new T.Vector3(P.x, 22*k+yy, P.z+32*k), new T.Vector3(P.x, 1.6+yy, P.z-3)];
 }
 function snapCam(){ const [a,b]=desiredCam(); camPos.copy(a); camLook.copy(b); }
-function resize(){ renderer.setSize(innerWidth,innerHeight,false); camera.aspect=innerWidth/innerHeight; camera.fov=camera.aspect<.9?40:32; camera.updateProjectionMatrix();
+let baseFov=32;
+function resize(){ renderer.setSize(innerWidth,innerHeight,false); camera.aspect=innerWidth/innerHeight; baseFov=camera.fov=camera.aspect<.9?40:32; camera.updateProjectionMatrix();
   document.documentElement.style.setProperty('--topH',Math.round($('top').getBoundingClientRect().bottom)+'px'); }
 addEventListener('resize',resize); resize();
+
+/* ============ story: the landing page scrolls the camera round the globe, from dawn to night ============ */
+let story=document.body.classList.contains('story'), spin=8, sProg=0, sCh=-1, sFocus=null, sVel=0, sTop=0, walkIn=0, pulseAt=0;
+const sh={x:0,y:0}, par={x:0,y:0,tx:0,ty:0};
+const storyEl=$('story'), secs=[...storyEl.querySelectorAll('.ch')];
+const SUNSET=todayPrayers(Date.now()).find(x=>x.k==='maghrib').min-14;
+/* each chapter: where the camera sits (flat street space, like the tour), the street clock, and how far the picture slides away from the text */
+const SK=[
+  {orbit:[0,60,96], min:7*60+30, sx:.2, sy:.3},
+  {pos:[8,6.5,10], look:[0,4,-8], min:9*60+30, sx:.17, sy:.2},
+  {pos:[-3,17,27], look:[-3,2.5,-7], min:12*60, sx:.17, sy:.22},
+  {pos:[-12,2.2,-1.5], look:[6,.6,-7], min:15*60+30, sx:.15, sy:.2},
+  {pos:[56,7,11], look:[48,4,-9], min:17*60+30, sx:.17, sy:.2},
+  {pos:[8,10,32], look:[-1,1.5,13], min:SUNSET, sx:.17, sy:.2},
+  {orbit:[-22,92,74], min:21*60+20, sx:0, sy:.0},
+];
+const V3=T.Vector3, kA=[new V3(),new V3()], kB=[new V3(),new V3()];
+function keyCam(k,out,portrait){ const [Cp,L]=out;
+  if(k.orbit){ const s=portrait?2:1; L.set(spin,-9,ZC); Cp.set(spin+k.orbit[0]*s,k.orbit[1]*s,ZC+k.orbit[2]*s); return out; }
+  let p=k.pos, l=k.look, sc=1.35;
+  if(k===SK[2]&&sFocus){ const f=PB[sFocus]; p=f.cam; l=f.look; sc=1.3; }
+  const d=wrapNear(l[0],spin)-l[0]; L.set(l[0]+d,l[1],l[2]); Cp.set(p[0]+d,p[1],p[2]).sub(L).multiplyScalar(sc*(portrait?1.5:1)).add(L); if(portrait) L.y-=1.5;
+  return out; }
+function storyCam(){ const portrait=camera.aspect<.9, i=Math.min(SK.length-1,Math.floor(sProg)), f=sProg-i, e=ease(f);
+  keyCam(SK[i],kA,portrait); keyCam(SK[Math.min(SK.length-1,i+1)],kB,portrait);
+  const Cp=kA[0].lerp(kB[0],e), L=kA[1].lerp(kB[1],e);
+  /* a little parallax from the pointer */
+  const dd=Cp.distanceTo(L)*.035; Cp.x+=par.x*dd; Cp.y-=par.y*dd*.6;
+  return [Cp.clone(),L.clone()]; }
+let secTop=[];
+function measure(){ secTop=secs.map(s=>s.offsetTop); secTop.push(storyEl.scrollHeight); }
+addEventListener('resize',measure); measure();
+const lerp=(a,b,k)=>a+(b-a)*k;
+function storyTick(dt){
+  const top=storyEl.scrollTop, H=innerHeight; sVel=lerp(sVel,(top-sTop)/Math.max(dt,.001),.12); sTop=top;
+  let i=0; while(i<secs.length-1&&top>=secTop[i+1]) i++;
+  const span=Math.max(1,secTop[i+1]-secTop[i]), local=(top-secTop[i])/span, hold=i===0?.22:.3;
+  const tgt=i>=secs.length-1?secs.length-1:i+Math.min(1,Math.max(0,(local-hold)/(1-hold)));
+  sProg=reduce?tgt:lerp(sProg,tgt,1-Math.exp(-dt*7));
+  /* reveals: a chapter is "in" while its text is on screen */
+  secs.forEach((s,j)=>{ const a=secTop[j]-top, on=a<H*.55&&a+(secTop[j+1]-secTop[j])>H*.45; s.classList.toggle('in',on); });
+  const ch=Math.round(sProg); if(ch!==sCh){ sCh=ch; railMark(ch); if(ch!==2) setFocus(null);
+    if(ch===3&&performance.now()-pulseAt>6000){ pulseAt=performance.now(); [-42,-30,-17,16,27.6,48].forEach((x,k)=>setTimeout(()=>{ if(story&&sCh===3) W.pulse(x); },300+k*480)); } }
+  document.body.classList.toggle('sdark',sProg>5.45);
+  /* the street clock follows the story: morning at the top, night at the end */
+  const a=Math.floor(sProg), m=lerp(SK[a].min,SK[Math.min(SK.length-1,a+1)].min,sProg-a), real=Date.now();
+  clockOffset=dayStart(real)+m*6e4-real; clockMode='story';
+  const hh=Math.floor(m/60), mm=Math.floor(m%60); $('sClk').textContent=`Kuala Lumpur · ${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+  if(sProg<.6||sProg>5.4) spin+=dt*(reduce?0:.9);
+  if(spin>LMID+LOOP/2){ spin-=LOOP; camPos.x-=LOOP; camLook.x-=LOOP; }
+  const max=Math.max(1,storyEl.scrollHeight-H); $('sBar').style.transform=`scaleX(${top/max})`;
+  const sk=Math.max(-8,Math.min(8,sVel*.004)); storyEl.style.setProperty('--skew',(-sk).toFixed(2)+'deg');
+  par.x=lerp(par.x,par.tx,.05); par.y=lerp(par.y,par.ty,.05);
+}
+/* rail */
+$('sRail').innerHTML=secs.map((s,i)=>`<button data-i="${i}" aria-label="${s.dataset.k}"><span>${s.dataset.k}</span><i></i></button>`).join('');
+$('sRail').querySelectorAll('button').forEach(b=>b.onclick=()=>goSec(+b.dataset.i));
+function railMark(i){ $('sRail').querySelectorAll('button').forEach((b,j)=>b.classList.toggle('on',j===i)); }
+function goSec(i){ storyEl.scrollTo({top:secTop[i]+(i?innerHeight*.35:0),behavior:reduce?'auto':'smooth'}); }
+$('sMark').onclick=()=>goSec(0);
+/* systems list: point at a name and the camera flies to that shop */
+$('sysList').innerHTML=['santaka','rumika','arogya','mahardika','pautika'].map(k=>{ const s=SYS[k];
+  return `<li style="--c:${PB[k].col}" data-k="${k}"><button class="row" aria-label="Show ${s.name} on the street"><span class="nm"><i></i>${s.name}</span><span class="st">${s.st}</span><span class="wh">${s.what}</span></button><button class="try" data-go="${k}">Try the toy demo →</button></li>`; }).join('');
+function setFocus(k){ sFocus=k; $('sysList').querySelectorAll('li').forEach(li=>li.classList.toggle('on',li.dataset.k===k)); }
+$('sysList').querySelectorAll('li').forEach(li=>{ const k=li.dataset.k;
+  li.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') setFocus(k); });
+  li.querySelector('.row').addEventListener('click',()=>setFocus(sFocus===k&&!fine?null:k));
+  li.querySelector('.row').addEventListener('focus',()=>setFocus(k)); });
+$('sysList').addEventListener('pointerleave',e=>{ if(e.pointerType!=='touch') setFocus(null); });
+$('sysList').querySelectorAll('.try').forEach(b=>b.onclick=()=>enterWalk(b.dataset.go));
+/* split headings into words (and the name into letters) for the reveal */
+function splitWords(el){ let i=0; const walk=n=>{ [...n.childNodes].forEach(c=>{ if(c.nodeType===3){ const f=document.createDocumentFragment();
+    c.textContent.split(/(\s+)/).forEach(w=>{ if(!w) return; if(/^\s+$/.test(w)){ f.appendChild(document.createTextNode(' ')); return; }
+      const o=document.createElement('span'); o.className='w'; const inn=document.createElement('span'); inn.style.setProperty('--i',i++);
+      if(el.classList.contains('split-c')) [...w].forEach(ch=>{ const c2=document.createElement('span'); c2.className='c'; c2.textContent=ch; inn.appendChild(c2); }); else inn.textContent=w;
+      o.appendChild(inn); f.appendChild(o); }); c.replaceWith(f); } else if(c.nodeType===1&&c.tagName!=='BR') walk(c); }); }; walk(el); }
+storyEl.querySelectorAll('.split,.split-c').forEach(splitWords);
+$('marqIn').innerHTML=(()=>{ const one=['DaulatLabs','Santaka','Rumika','Arogya','Mahardika','Pautika'].map(n=>`<span>${n}</span><i>✦</i>`).join(''); return one+one; })();
+/* custom cursor and magnetic buttons */
+const curD=$('cur'), curR=$('curR'); const cp={x:innerWidth/2,y:innerHeight/2,rx:innerWidth/2,ry:innerHeight/2};
+addEventListener('pointermove',e=>{ cp.x=e.clientX; cp.y=e.clientY; par.tx=e.clientX/innerWidth*2-1; par.ty=e.clientY/innerHeight*2-1;
+  if(fine) curR.classList.toggle('big',!!(e.target.closest&&e.target.closest('a,button'))); },{passive:true});
+function cursorTick(){ if(!fine||!story) return; cp.rx=lerp(cp.rx,cp.x,.18); cp.ry=lerp(cp.ry,cp.y,.18);
+  curD.style.transform=`translate(${cp.x}px,${cp.y}px)`; curR.style.transform=`translate(${cp.rx}px,${cp.ry}px)`; }
+if(fine) document.querySelectorAll('.mag').forEach(b=>{ b.addEventListener('pointermove',e=>{ const r=b.getBoundingClientRect(); b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.3}px,${(e.clientY-r.top-r.height/2)*.3}px)`; });
+  b.addEventListener('pointerleave',()=>b.style.transform=''); });
+$('sMail').onclick=async()=>{ const b=$('sMail'); try{ await navigator.clipboard.writeText('amirulirfan.utm@gmail.com'); b.firstChild.textContent='Email copied '; }catch(_){ location.href='mailto:amirulirfan.utm@gmail.com'; } setTimeout(()=>b.firstChild.textContent='amirulirfan.utm@gmail.com ',1600); };
+/* moving between the story and the walkable street */
+function enterWalk(id){ if(!story) return; story=false; document.body.classList.remove('story','sdark'); setFocus(null);
+  setClock('live'); wxMode='auto'; walkIn=reduce?0:1.6; $('backStory').hidden=false;
+  $('hint').style.opacity=1; setTimeout(()=>{ if(moved) $('hint').style.opacity=0; },7000);
+  if(id) setTimeout(()=>travel(id),reduce?0:700); else canvas.focus({preventScroll:true}); }
+function enterStory(top){ if(story) return; closeSheet(); endTalk(); if(touring) endTour(); if(mapOpen) closeMap(); if(driving) exitCar(); P.target=null;
+  story=true; wxMode='clear'; document.body.classList.add('story'); $('backStory').hidden=true; measure(); if(top) storyEl.scrollTop=0; storyEl.focus({preventScroll:true}); }
+$('sWalk').onclick=()=>enterWalk(); $('sPlay').onclick=()=>enterWalk();
+$('backStory').onclick=()=>enterStory(false);
+if(story) wxMode='clear';
 
 /* ============ physics helpers ============ */
 function collide(o,r=.45,own=null){ let hit=null; const y=o.y||0;
@@ -1596,7 +1939,7 @@ const camOff=new T.Vector3(), gLook=new T.Vector3(), gTgt=new T.Vector3(), PSM=n
 const onScreen=v=>globe(v.set(wrapNear(v.x,camLook.x),v.y,v.z)).project(camera);
 const ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
 /* true when something at (x,z) with radius r stands between the camera and you, in flat street space */
-function blocks(x,z,r){ if(tourCam) return false; const ax=camPos.x, az=camPos.z, vx=P.x-ax, vz=P.z-az, L2=vx*vx+vz*vz||1; x=wrapNear(x,P.x);
+function blocks(x,z,r){ if(tourCam||story) return false; const ax=camPos.x, az=camPos.z, vx=P.x-ax, vz=P.z-az, L2=vx*vx+vz*vz||1; x=wrapNear(x,P.x);
   const k=((x-ax)*vx+(z-az)*vz)/L2; return k>-.1&&k<.9&&Math.hypot(ax+vx*k-x,az+vz*k-z)<r; }
 
 function frame(){
@@ -1618,6 +1961,7 @@ function frame(){
   sun.color.copy(useSun?cur.sun:MOON); sun.intensity=useSun?cur.sunI:cur.moonI;
   hemi.color.copy(cur.hs); hemi.groundColor.copy(cur.hg); hemi.intensity=cur.hI+fl*1.6; scene.fog.color.copy(cur.hor);
   scene.fog.near=80-42*wcur.rain; scene.fog.far=260-130*wcur.rain;
+  { const b=Math.max(0,camPos.distanceTo(camLook)-40); scene.fog.near+=b; scene.fog.far+=b*1.6; } /* far story shots see the whole planet clearly */
   renderer.toneMappingExposure=cur.exp;
   hqFlash=Math.max(0,hqFlash-dt*1.6);
   winMat.emissiveIntensity=cur.win*1.3; signMats.forEach(m=>m.emissiveIntensity=.08+cur.win*.55); hqSign.material.emissiveIntensity+=hqFlash*1.4;
@@ -1638,7 +1982,7 @@ function frame(){
 
   /* ---- prayer times: azan banner, surau speaker ---- */
   const jumped=Math.abs(now-lastScene-raw*1000)>4000;
-  for(const x of todayPrayers(now)){ if(!PRAYERS.includes(x.k)) continue; const at=dayStart(now)+x.min*6e4, key=myParts(now).d+x.k;
+  if(!story) for(const x of todayPrayers(now)){ if(!PRAYERS.includes(x.k)) continue; const at=dayStart(now)+x.min*6e4, key=myParts(now).d+x.k;
     if(azanDone.has(key)) continue; if((lastScene<at&&now>=at&&!jumped)||(now>=at&&now<at+4*6e4&&(jumped||frameN<3))) triggerAzan(x,now); }
   lastScene=now;
   const azanOn=now<azanUntil&&now>azanUntil-4.2*6e4;
@@ -1653,6 +1997,7 @@ function frame(){
   if(!mapOpen&&!fading){ ix=(keys['d']||keys['arrowright']?1:0)-(keys['a']||keys['arrowleft']?1:0)+joy.x; iz=(keys['s']||keys['arrowdown']?1:0)-(keys['w']||keys['arrowup']?1:0)+joy.z; }
   let m=Math.hypot(ix,iz); if(m>1){ ix/=m; iz/=m; m=1; }
   if(touring){ if(m>.3&&tourI===TOUR.length-1) endTour(); else { ix=iz=0; m=0; jumpBuf=0; } }
+  if(story){ ix=iz=0; m=0; jumpBuf=0; }
   jumpBuf-=dt;
 
   if(driving){
@@ -1718,7 +2063,7 @@ function frame(){
   H.umb.visible=umb>.02&&!driving&&!sitting; H.umb.scale.setScalar(Math.max(.001,umb)); if(H.umb.visible&&P.ground&&P.wave===0){ H.arms[1].rotation.x=-.5; H.arms[1].rotation.z=-.35; }
   { const g=groundAt(P.x,P.z,P.y); const hgt=P.y-g.h; heroShadow.visible=!driving; heroShadow.position.set(P.x,Math.max(.19,g.h+.03),P.z); heroShadow.scale.setScalar(1/(1+hgt*.18)); }
   markers.forEach(mk=>{ const demo=DEMOS.includes(mk.id), done=demo?tried.has(mk.id):seen.has(mk.id); mk.s.material=demo?(done?MK['✓']:MK['!']):MK['i'];
-    const show=!touring&&!(demo?false:done)&&!(openId===mk.id); mk.v=(mk.v??1)+((show?1:0)-(mk.v??1))*Math.min(1,dt*6); mk.s.visible=mk.v>.02;
+    const show=!touring&&!story&&!(demo?false:done)&&!(openId===mk.id); mk.v=(mk.v??1)+((show?1:0)-(mk.v??1))*Math.min(1,dt*6); mk.s.visible=mk.v>.02;
     const cd=Math.hypot(wrapNear(mk.s.position.x,camPos.x)-camPos.x,mk.s.position.y-camPos.y,mk.s.position.z-camPos.z), sc=(done?1.05:1.5)*mk.v*clamp01((cd-10)/12); mk.s.scale.set(sc+.001,sc+.001,1); mk.s.position.y=mk.y+Math.sin(t*2.4+mk.y)*.22; });
   dustT-=dt; if(!driving&&P.ground&&realSpd>3&&dustT<0){ dustT=.18; puff(P.x-Math.sin(P.face)*.4,P.y,P.z-Math.cos(P.face)*.4); }
   if(driving&&Math.abs(CAR.v)>9&&dustT<0){ dustT=.12; puff(CAR.x-Math.sin(CAR.h)*2,0,CAR.z-Math.cos(CAR.h)*2); }
@@ -1751,7 +2096,7 @@ function frame(){
     CT.sit+=((cs<.3?1:0)-CT.sit)*Math.min(1,dt*4); catO.body.rotation.x=-.35*CT.sit; catO.body.position.y=.45-.08*CT.sit; catO.legs[2].visible=catO.legs[3].visible=CT.sit<.6;
     catO.tail.rotation.z=Math.sin(t*(cs>.3?6:CT.pet>0?9:2))*.5; catO.head.rotation.y=CT.pet>0?Math.sin(t*6)*.15:Math.sin(t*.7)*.3*CT.sit; catO.head.rotation.x=CT.pet>0?-.25:0;
     CT.meow-=dt; const bub=$('bubble');
-    if(CT.meow<0&&CT.sit>.8&&!openId&&!talking&&!touring){ CT.meow=14+rnd()*12; bub.textContent=wcur.rain>.3?'meow (wet)':'meow'; bub.classList.add('on'); setTimeout(()=>bub.classList.remove('on'),1600); }
+    if(CT.meow<0&&CT.sit>.8&&!openId&&!talking&&!touring&&!story){ CT.meow=14+rnd()*12; bub.textContent=wcur.rain>.3?'meow (wet)':'meow'; bub.classList.add('on'); setTimeout(()=>bub.classList.remove('on'),1600); }
     onScreen(tmp.set(cat.position.x,1.3,cat.position.z)); bub.style.left=((tmp.x+1)/2*innerWidth)+'px'; bub.style.top=((1-tmp.y)/2*innerHeight)+'px'; }
   for(let i=hearts.length-1;i>=0;i--){ const h=hearts[i]; h.life-=dt; h.s.position.y+=h.vy*dt; h.s.material.opacity=clamp01(h.life*1.5); if(h.life<=0){ scene.remove(h.s); h.s.material.dispose(); hearts.splice(i,1); } }
 
@@ -1779,10 +2124,10 @@ function frame(){
       n.umb.visible=umb>.02&&n!==kid; n.umb.scale.setScalar(Math.max(.001,umb));
       if(n===kid&&!talking){ n.p.arms[0].rotation.z=-.12; n.p.arms[1].rotation.z=.12; if(P.on&&P.on!==course[0]){ n.p.arms[0].rotation.z=-2.4+Math.sin(t*10)*.2; n.p.arms[1].rotation.z=2.4-Math.sin(t*10)*.2; } }
       if(n===pakMat&&pakWave>0){ n.p.arms[1].rotation.z=-2.5; n.p.arms[1].rotation.x=Math.sin(t*12)*.35; } }
-    const d=Math.hypot(P.x-n.p.g.position.x,P.z-n.p.g.position.z); n.tag.visible=d<9&&!mapOpen&&!touring; n.tag.material.opacity=clamp01((9-d)/3); n.tag.position.y=3.6+umb*.85; });
+    const d=Math.hypot(P.x-n.p.g.position.x,P.z-n.p.g.position.z); n.tag.visible=d<9&&!mapOpen&&!touring&&!story; n.tag.material.opacity=clamp01((9-d)/3); n.tag.position.y=3.6+umb*.85; });
   heroTag.position.y=3.55+(H.umb.visible?umb*.85:0);
   sitters.forEach((p,i)=>{ animate(p,0,dt,t); p.legs.forEach(l=>l.rotation.x=-1.45); p.arms[0].rotation.x=-.9+Math.sin(t*1.3+i)*.15; p.hg.rotation.y=Math.sin(t*.5+i*2)*.4; });
-  heroTag.visible=!mapOpen&&!touring;
+  heroTag.visible=!mapOpen&&!touring&&!story;
 
   /* ---- traffic ---- */
   cars.forEach(c=>{ const blocked=Math.abs(P.z-c.z)<2.4 && (c.dir>0?(P.x>c.g.position.x&&P.x<c.g.position.x+7.5):(P.x<c.g.position.x&&P.x>c.g.position.x-7.5));
@@ -1793,7 +2138,7 @@ function frame(){
   /* ---- demo effects ---- */
   for(let i=fx.length-1;i>=0;i--){ const f=fx[i]; f.t+=dt; f.fn(Math.min(1,f.t/f.dur)); if(f.t>=f.dur){ if(f.end) f.end(); fx.splice(i,1); } }
   for(let i=pulses.length-1;i>=0;i--){ const p=pulses[i]; p.t+=dt/p.dur; const k=ease(Math.min(1,p.t)); p.m.position.x=p.x0*(1-k); p.m.position.y=.36+Math.sin(k*Math.PI)*.25; p.m.scale.setScalar(.8+Math.sin(t*14)*.15);
-    if(p.t>=1){ scene.remove(p.m); pulses.splice(i,1); hqFlash=1; drawHQ(true); setTimeout(()=>drawHQ(false),900); if(!touring) sfx.arrive(); } }
+    if(p.t>=1){ scene.remove(p.m); pulses.splice(i,1); hqFlash=1; drawHQ(true); setTimeout(()=>drawHQ(false),900); if(!touring&&!story) sfx.arrive(); } }
   for(let i=planes.length-1;i>=0;i--){ const p=planes[i]; p.t+=dt; p.m.visible=p.t>=0; if(p.t<0) continue; const k=Math.min(1,p.t/2.8);
     p.m.position.set(p.x0+(p.tx-p.x0)*k, 2.2+Math.sin(k*Math.PI)*4.5+k*1.5, p.z0+(p.tz-p.z0)*k); p.m.rotation.set(-.2+Math.cos(k*Math.PI)*.3, Math.atan2(p.tx-p.x0,p.tz-p.z0), Math.sin(t*5+i)*.35);
     p.m.material.opacity=1-clamp01((k-.8)/.2); if(k>=1){ scene.remove(p.m); p.m.material.dispose(); planes.splice(i,1); } }
@@ -1807,21 +2152,29 @@ function frame(){
   { const ax=camPos.x, az=camPos.z, bx=driving?CAR.x:P.x, bz=driving?CAR.z:P.z, vx=bx-ax, vz=bz-az, L2=vx*vx+vz*vz||1;
     trees.forEach(g=>{ g.rotation.z=Math.sin(t*(.8+wcur.storm*1.5)+g.userData.sway)*(.012+wcur.storm*.03);
       const k=((g.position.x-ax)*vx+(g.position.z-az)*vz)/L2, px=ax+vx*k-g.position.x, pz=az+vz*k-g.position.z;
-      const block=!tourCam&&k>-.05&&k<.93&&Math.hypot(px,pz)<2.4*g.userData.s+.6; g.userData.v+=((block?0:1)-g.userData.v)*Math.min(1,dt*7);
+      const block=!tourCam&&!story&&k>-.05&&k<.93&&Math.hypot(px,pz)<2.4*g.userData.s+.6; g.userData.v+=((block?0:1)-g.userData.v)*Math.min(1,dt*7);
       g.scale.setScalar(Math.max(.001,g.userData.s*g.userData.v)); g.visible=g.userData.v>.03; }); }
-  clouds.forEach((g,i)=>{ g.position.x=wrapNear(g.position.x+dt*(.5+i%3*.25),P.x); });
+  { const far=camPos.distanceTo(camLook)>45; clouds.forEach((g,i)=>{ g.position.x=wrapNear(g.position.x+dt*(.5+i%3*.25),P.x); g.visible=!far; }); }
 
   /* walking off one side of the loop brings you back in on the other */
   { const ref=driving?CAR.x:P.x, d=wrapNear(ref,LMID)-ref;
     if(d){ P.x+=d; camPos.x+=d; camLook.x+=d; cat.position.x+=d; if(P.target) P.target.x+=d; if(driving){ CAR.x+=d; carCol.x=CAR.x; } } }
 
   /* camera: framed in flat street space, then carried onto the globe */
-  const [dc,dl]=desiredCam(); const ck=1-Math.exp(-dt*(tourCam?1.5:driving?5:focusId?2.6:4)); camPos.lerp(dc,ck); camLook.lerp(dl,ck);
+  if(story) storyTick(dt);
+  cursorTick();
+  { const nar=innerWidth<=820, k=Math.min(SK.length-1,Math.floor(sProg)), f=ease(sProg-k), A=SK[k], B=SK[Math.min(SK.length-1,k+1)];
+    const tx=story&&!nar?lerp(A.sx,B.sx,f):0, ty=story&&nar?lerp(A.sy,B.sy,f):0, sk=1-Math.exp(-dt*3); sh.x+=(tx-sh.x)*sk; sh.y+=(ty-sh.y)*sk;
+    const warp=story&&!reduce?Math.min(7,Math.abs(sVel)*.0035):0, fov=baseFov+warp;
+    if(Math.abs(camera.fov-fov)>.01){ camera.fov=fov; camera.updateProjectionMatrix(); }
+    if(Math.abs(sh.x)+Math.abs(sh.y)>.002) camera.setViewOffset(innerWidth,innerHeight,-sh.x*innerWidth,sh.y*innerHeight,innerWidth,innerHeight);
+    else if(camera.view&&camera.view.enabled) camera.clearViewOffset(); }
+  const [dc,dl]=desiredCam(); walkIn=Math.max(0,walkIn-dt); const ck=1-Math.exp(-dt*(story?2.6:walkIn>0?1.3:tourCam?1.5:driving?5:focusId?2.6:4)); camPos.lerp(dc,ck); camLook.lerp(dl,ck);
   frameAt(camLook.x,camLook.z); tmp.subVectors(camPos,camLook); localToWorld(tmp,camOff);
   globe(gLook.copy(camLook)); camera.position.copy(gLook).add(camOff); camera.up.copy(FU); camera.lookAt(gLook);
   sky.position.copy(camera.position); sky.quaternion.setFromRotationMatrix(FM.makeBasis(FE,FU,FS));
   hemi.position.copy(FU);
-  { const fx=tourCam?camLook.x:P.x, fz=tourCam?camLook.z:P.z-4; globe(gTgt.set(fx,0,fz)); frameAt(fx,fz); localToWorld(lightDir,tmp); sun.target.position.copy(gTgt); sun.position.copy(gTgt).addScaledVector(tmp,80); }
+  { const fx=(tourCam||story)?camLook.x:P.x, fz=(tourCam||story)?camLook.z:P.z-4; globe(gTgt.set(fx,0,fz)); frameAt(fx,fz); localToWorld(lightDir,tmp); sun.target.position.copy(gTgt); sun.position.copy(gTgt).addScaledVector(tmp,80); }
 
   /* skip whatever is round the back of the globe or off screen */
   camera.updateMatrixWorld(); PSM.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse); FRU.setFromProjectionMatrix(PSM);
@@ -1850,14 +2203,13 @@ function bubbleAt(n,text){ const b=document.createElement('div'); b.className='u
 H.g.position.set(P.x,0,P.z); H.g.rotation.y=P.face;
 snapSky(sunVec(sceneNow()).el,wcur); lightDir.set(0,1,0);
 $('hint').textContent = touchy ? 'Drag the stick to walk. Tap Jump to jump. Tap the round map to see everything.' : 'WASD to walk · Space to jump · E to go in or talk · M for the map';
-const firstVisit=store.get('ipan-tour')!=='1';
-if(firstVisit&&!reduce){ startTour(); camPos.set(0,70,110); camLook.set(0,0,-4); }
-else if(firstVisit){ startTour(); snapCam(); }
-else snapCam();
-$('brand').style.cursor='pointer'; $('brand').title='Replay the intro tour'; $('brand').onclick=()=>startTour();
+$('loading').classList.add('gone');
+if(story){ storyTick(.016); sProg=Math.round(sProg); snapCam(); if(!reduce&&storyEl.scrollTop<10){ camPos.y+=120; camPos.z+=160; } storyEl.focus({preventScroll:true}); }
+else { snapCam(); $('backStory').hidden=false; }
+$('brand').style.cursor='pointer'; $('brand').title='Back to the story'; $('brand').onclick=()=>enterStory(true);
 requestAnimationFrame(frame);
-setTimeout(()=>$('loading').classList.add('gone'),150);
-window.__dbg={snapCam,P,CAR,DS,W,travel,openSheet,setClock,get wx(){return wxMode;},set wx(v){wxMode=v;},enterCar,exitCar,openMap,closeMap,startTalk,talkers,npcs,interact,startTour,endTour,tourNext,get touring(){return touring;},renderer,scene,tried};
+preFinish();
+window.__dbg={snapCam,enterWalk,enterStory,get story(){return story;},get sProg(){return sProg;},P,CAR,DS,W,travel,openSheet,setClock,get wx(){return wxMode;},set wx(v){wxMode=v;},enterCar,exitCar,openMap,closeMap,startTalk,talkers,npcs,interact,startTour,endTour,tourNext,get touring(){return touring;},renderer,scene,tried};
 }
 const go=()=>{ try{ build(); }catch(err){ console.error(err); noGL(); } };
 Promise.race([document.fonts?document.fonts.ready:Promise.resolve(), new Promise(r=>setTimeout(r,1800))]).then(go);
